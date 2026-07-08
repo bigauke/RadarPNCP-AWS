@@ -102,14 +102,14 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 <div class="cover">
   <div class="cb">Documentação Técnica &middot; eEDB-016 &middot; 2026</div>
   <h1><span>Radar</span>PNCP</h1>
-  <p class="cs">Mapeamento de Redes de Contratacao Publica em Grafo &mdash; implantado na nuvem AWS com Neo4j</p>
+  <p class="cs">Mapeamento de Redes de Contratação Pública em Grafo &mdash; implantado na nuvem AWS com Neo4j</p>
   <div class="cd"></div>
   <div class="cm">
     <div class="ci"><span class="cl">Curso</span><span class="cv">Especialização em Big Data &mdash; Escola Politécnica da USP</span></div>
-    <div class="ci"><span class="cl">Disciplina</span><span class="cv">Repositorios de Dados e NoSQL (eEDB-016)</span></div>
+    <div class="ci"><span class="cl">Disciplina</span><span class="cv">Repositórios de Dados e NoSQL (eEDB-016)</span></div>
     <div class="ci"><span class="cl">Docentes</span><span class="cv">Prof. Dr. Pedro Luiz Pizzigatti Correa &middot; Prof. Dra. Jeaneth Machicao</span></div>
     <div class="ci"><span class="cl">Tecnologia</span><span class="cv">Neo4j 5 (grafos) &middot; AWS S3 + RDS + EC2 &middot; Python &middot; Cypher</span></div>
-    <div class="ci"><span class="cl">Domínio</span><span class="cv">Contratacoes publicas do PNCP modeladas como rede de relacionamentos</span></div>
+    <div class="ci"><span class="cl">Domínio</span><span class="cv">Contratações publicas do PNCP modeladas como rede de relacionamentos</span></div>
   </div>
   <div class="cf">
     <span class="cfl">Julho 2026 &middot; Repositorio: eEDB-016proj</span>
@@ -155,7 +155,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 &#x251C;&#x2500;&#x2500; beautiful_arch.png            # Diagrama arquitetural
 &#x251C;&#x2500;&#x2500; docker-compose.yml            # Neo4j 5 local (desenvolvimento)
 &#x251C;&#x2500;&#x2500; etapa3_poc_radarpncp.cypher   # Consultas Q1-Q7 em Cypher
-&#x2514;&#x2500;&#x2500; screenshots/                  # Evidencias visuais das execucoes</pre>
+&#x2514;&#x2500;&#x2500; screenshots/                  # Evidências visuais das execuções</pre>
 
 <h2><span class="sn">04</span> Esquema do Grafo</h2>
 <div class="schema">
@@ -190,7 +190,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
   <li><strong>Q7</strong> &mdash; Indício de fracionamento de despesa (mesmo fornecedor/órgão, janela &lt;30 dias)</li>
 </ol>
 
-<h2><span class="sn">06</span> Instrucoes de Implantacao</h2>
+<h2><span class="sn">06</span> Instruções de Implantação</h2>
 <p>A implantacao na nuvem foi totalmente automatizada com <strong>boto3</strong> e Python:</p>
 <ol>
   <li>Conecta na AWS e configura o Security Group</li>
@@ -202,14 +202,14 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 # Neo4j disponivel em: http://&lt;IP_EC2&gt;:7474
 # Login: neo4j / radarpncp123</pre>
 
-<h2><span class="sn">07</span> Relatorios e Resultados</h2>
+<h2><span class="sn">07</span> Relatórios e Resultados</h2>
 <ul>
   <li><strong>Relatorio_RadarPNCP_Etapa3.md / .pdf</strong> &mdash; Relatório técnico completo</li>
   <li><strong>RadarPNCP_apresentacao_.pptx</strong> &mdash; Slides com arquitetura e prints do grafo</li>
   <li><strong>README_RadarPNCP.pdf</strong> &mdash; Esta documentação de entrega</li>
 </ul>
 
-<h2><span class="sn">08</span> Evidencias de Execução</h2>
+<h2><span class="sn">08</span> Evidências de Execução</h2>
 <p>Retornos literais das queries executadas na instância de produção (AWS EC2 + Neo4j):</p>
 
 <div class="qc">

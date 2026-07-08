@@ -179,7 +179,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
   <div class="cover-main">
     <div class="cover-kicker">Relatório Técnico de Execução &mdash; Julho 2026</div>
-    <div class="cover-title">Rede de<br/>Contratacao<br/><em>Publica</em></div>
+    <div class="cover-title">Rede de<br/>Contratação<br/><em>Pública</em></div>
     <p class="cover-subtitle">Mapeamento em Grafo com Neo4j &mdash; Dados Reais do PNCP na AWS</p>
     <div class="cover-rule"></div>
 
@@ -190,7 +190,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
       </div>
       <div class="cover-card">
         <div class="cover-card-label">Disciplina</div>
-        <div class="cover-card-value">Repositorios de Dados e NoSQL (eEDB-016)</div>
+        <div class="cover-card-value">Repositórios de Dados e NoSQL (eEDB-016)</div>
       </div>
       <div class="cover-card">
         <div class="cover-card-label">Tecnologia NoSQL</div>
@@ -350,7 +350,7 @@ Esta query identifica os maiores contratos (em volume financeiro) firmados pelo 
 
 <!-- Q6 -->
 <h2><span class="sn">Q6</span> Volumes Totais por Modalidade</h2>
-<p><strong>Modalidade Analisada:</strong> <code>Inexigibilidade de Licitacao</code> &mdash; Lista os fornecedores que mais faturaram globalmente dentro desta modalidade de contratacao.</p>
+<p><strong>Modalidade Analisada:</strong> <code>Inexigibilidade de Licitação</code> &mdash; Lista os fornecedores que mais faturaram globalmente dentro desta modalidade de contratacao.</p>
 
 <div class="dtable-wrap">
   <div class="dtable-title">Resultado da Query Q6 <span class="dtable-badge">5 registros</span></div>

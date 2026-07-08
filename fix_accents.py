@@ -33,12 +33,22 @@ replacements = {
     r'\bproducao\b': 'produção',
     r'\bVisualizacao\b': 'Visualização',
     r'\bInstancia\b': 'Instância',
-    r'\bInstância\b': 'Instância',
     r'\bIdentificacao\b': 'Identificação',
     r'\bMonopolio\b': 'Monopólio',
     r'\bFisico\b': 'Físico',
     r'\bnao\b': 'não',
-    r'\bNao\b': 'Não'
+    r'\bNao\b': 'Não',
+    r'\bContratacao\b': 'Contratação',
+    r'\bPublica\b': 'Pública',
+    r'\bRepositorios\b': 'Repositórios',
+    r'\bContratacoes\b': 'Contratações',
+    r'\bInstrucoes\b': 'Instruções',
+    r'\bImplantacao\b': 'Implantação',
+    r'\bRelatorios\b': 'Relatórios',
+    r'\bEvidencias\b': 'Evidências',
+    r'\bLicitacao\b': 'Licitação',
+    r'\bexecucoes\b': 'execuções',
+    r'\bórgaos\b': 'órgãos'
 }
 
 for file_name in files_to_check:
@@ -49,7 +59,8 @@ for file_name in files_to_check:
     
     new_content = content
     for pattern, replacement in replacements.items():
-        # Only replace exact words as provided, or we can use lambda
+        # Avoid replacing in filenames like Relatorio_RadarPNCP_Etapa3.md
+        # We should only replace words, but the regex \bRelatorios\b matches "Relatorios". "Relatorio_" won't match "\bRelatorios\b".
         new_content = re.sub(pattern, replacement, new_content)
         
     if new_content != content:
