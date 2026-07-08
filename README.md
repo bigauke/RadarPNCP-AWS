@@ -9,8 +9,8 @@
   - Prof. Dra. Jeaneth Machicao
 - **Discentes:** 
   - Antonio Daniel de Souza Linhares
-  - Hércules
-  - Yuri
+  - Hercules Ramos Veloso de Freitas
+  - Yuri Alexandre Barbosa Rodrigues
 
 ### 🛠️ Especificações Técnicas
 - **Tecnologia NoSQL:** Neo4j (Grafos) — implantado na nuvem (AWS EC2)
