@@ -1,5 +1,5 @@
 # 📊 Relatório RadarPNCP (Etapa 3) - Dados Reais
-> Executado no cluster AWS Neo4j com base extraída do PostgreSQL (Gold) e endereços da Receita Federal via BrasilAPI.
+> Executado no cluster AWS Neo4j com base extraída do PostgreSQL (Gold) e endereços da Receita Federal via Data Lake (S3/Athena).
 
 ## 🕸️ Grafo Interativo Gerado
 
@@ -51,7 +51,7 @@ Identifica fornecedores que detêm capilaridade extrema no governo, fornecendo p
 ---
 
 ## Q4 e Q5: Identificação de Cartel / Monopólio Físico (Mesmo Endereço)
-As queries Q4 e Q5 cruzam o endereço matriz/filial (obtido da Receita Federal via BrasilAPI) para encontrar fornecedores diferentes operando no **mesmo endereço físico** e prestando serviços para o mesmo órgão.
+As queries Q4 e Q5 cruzam o endereço matriz/filial (obtido da Receita Federal via Data Lake/Athena) para encontrar fornecedores diferentes operando no **mesmo endereço físico** e prestando serviços para o mesmo órgão.
 
 > [!NOTE]
 > **Resultado na amostra de 200 contratos:** Não foram identificadas empresas distintas dividindo o mesmo endereço operando no mesmo órgão. *(A restrição do limite amostral mitigou o aparecimento de fraudes deste tipo nesta execução específica).*

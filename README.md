@@ -19,7 +19,7 @@
 
 ---
 
-**Aviso:** Os dados utilizados neste repositório combinam uma amostra de dados reais do PNCP (extraídos via pipeline próprio para AWS RDS) e alguns registros simulados para fins didáticos (testar travessias).
+**Aviso:** Os dados utilizados neste repositório utilizam uma amostra de dados reais do PNCP (extraídos via pipeline próprio para AWS RDS) cruzados com a base de dados pública de CNPJs da Receita Federal (via Data Lake no S3 e AWS Athena).
 
 ## Sumário
 
@@ -47,7 +47,7 @@ O projeto evoluiu de um ambiente local para uma infraestrutura robusta na AWS:
 
 1. **Amazon S3:** Armazena os dumps originais da base relacional ("Gold") e scripts auxiliares.
 2. **Amazon RDS:** Executa o PostgreSQL armazenando a base relacional estruturada.
-3. **Amazon EC2 (Ingest Engine):** Máquina virtual Ubuntu que executa os scripts Python de orquestração, consome os dados do RDS, enriquece com a BrasilAPI e faz o upsert no Neo4j.
+3. **Amazon EC2 (Ingest Engine):** Máquina virtual Ubuntu que executa os scripts Python de orquestração, consome os dados do RDS, enriquece com os dados de endereço da Receita Federal (via S3/Athena) e faz o upsert no Neo4j.
 4. **Neo4j Graph Database:** Executando via Docker dentro da instância EC2, expondo as portas 7687 (Bolt) e 7474 (Browser).
 5. **Auditor/Usuário:** Acessa o painel do Neo4j na nuvem ou consome o relatório em PDF.
 
@@ -193,7 +193,6 @@ Para rápida conferência sem necessidade de subir o ambiente, abaixo estão os 
 ]
 ```
 
-*Nota: Consultas Q4 e Q5 foram elaboradas de forma focada no script `etapa3_poc_radarpncp.cypher` para os nós fictícios da demonstração e, em tempo de execução ao vivo com a base conectada na BrasilAPI, dependem de uma injeção de dados simulados (já incluída nos scripts).*
 
 ### 📸 Prints das Execuções (Screenshots do Grafo)
 

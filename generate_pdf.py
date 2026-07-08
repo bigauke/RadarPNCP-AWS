@@ -125,7 +125,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
 <div class="content">
 
-<div class="warn"><strong>Aviso sobre os Dados:</strong> Os dados combinam uma amostra de dados reais do PNCP (extraídos via pipeline para AWS RDS) e registros simulados para fins didaticos (testar travessias de grafo).</div>
+<div class="warn"><strong>Aviso sobre os Dados:</strong> Os dados combinam uma amostra de dados reais do PNCP (extraídos via pipeline para AWS RDS) cruzados com a base de dados pública de CNPJs da Receita Federal (via Data Lake no S3 e AWS Athena).</div>
 
 <h2><span class="sn">01</span> Dominio e Justificativa</h2>
 <p>O <strong>RadarPNCP</strong> e uma aplicação de apoio à auditoria de contratos publicos. Permite buscar um órgão publico ou fornecedor e visualizar a rede de relacionamentos entre contratos, destacando padrões de risco como: concentracao de fornecimento, coligação pelo mesmo endereço e indícios de fracionamento de despesa.</p>
