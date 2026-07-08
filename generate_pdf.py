@@ -125,10 +125,10 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
 <div class="content">
 
-<div class="warn"><strong>Aviso sobre os Dados:</strong> Os dados combinam uma amostra de dados reais do PNCP (extraidos via pipeline para AWS RDS) e registros simulados para fins didaticos (testar travessias de grafo).</div>
+<div class="warn"><strong>Aviso sobre os Dados:</strong> Os dados combinam uma amostra de dados reais do PNCP (extraídos via pipeline para AWS RDS) e registros simulados para fins didaticos (testar travessias de grafo).</div>
 
 <h2><span class="sn">01</span> Dominio e Justificativa</h2>
-<p>O <strong>RadarPNCP</strong> e uma aplicacao de apoio a auditoria de contratos publicos. Permite buscar um orgao publico ou fornecedor e visualizar a rede de relacionamentos entre contratos, destacando padroes de risco como: concentracao de fornecimento, coligacao pelo mesmo endereco e indicios de fracionamento de despesa.</p>
+<p>O <strong>RadarPNCP</strong> e uma aplicação de apoio à auditoria de contratos publicos. Permite buscar um órgão publico ou fornecedor e visualizar a rede de relacionamentos entre contratos, destacando padrões de risco como: concentracao de fornecimento, coligação pelo mesmo endereço e indícios de fracionamento de despesa.</p>
 <p>A tecnologia escolhida foi o <strong>Neo4j</strong> porque o padrao de acesso do negocio exige navegacao multi-salto sobre uma teia de conexoes &mdash; algo computacionalmente custoso no modelo relacional, mas natural e eficiente no modelo de grafos.</p>
 
 <h2><span class="sn">02</span> Arquitetura na Nuvem (AWS)</h2>
@@ -151,7 +151,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 &#x251C;&#x2500;&#x2500; deploy_to_aws.py              # Automacao de infraestrutura via SSM
 &#x251C;&#x2500;&#x2500; ingest_postgres_to_neo4j.py   # Ingestao RDS (Postgres) -&gt; Neo4j via EC2
 &#x251C;&#x2500;&#x2500; extract_queries.py            # Executa queries Q1-Q7 no Neo4j e salva JSON
-&#x251C;&#x2500;&#x2500; Relatorio_RadarPNCP_Etapa3.md # Relatorio tecnico completo
+&#x251C;&#x2500;&#x2500; Relatorio_RadarPNCP_Etapa3.md # Relatório técnico completo
 &#x251C;&#x2500;&#x2500; beautiful_arch.png            # Diagrama arquitetural
 &#x251C;&#x2500;&#x2500; docker-compose.yml            # Neo4j 5 local (desenvolvimento)
 &#x251C;&#x2500;&#x2500; etapa3_poc_radarpncp.cypher   # Consultas Q1-Q7 em Cypher
@@ -173,21 +173,21 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
     <tr><td><code>Fornecedor</code></td><td>No</td><td>Empresa ou pessoa juridica fornecedora</td></tr>
     <tr><td><code>Contrato</code></td><td>No</td><td>Contrato publico com numero, valor e data</td></tr>
     <tr><td><code>Modalidade</code></td><td>No</td><td>Tipo de licitacao (Pregao, Dispensa etc.)</td></tr>
-    <tr><td><code>CONTRATOU</code></td><td>Relacionamento</td><td>Orgao &rarr; Contrato</td></tr>
+    <tr><td><code>CONTRATOU</code></td><td>Relacionamento</td><td>Órgão &rarr; Contrato</td></tr>
     <tr><td><code>FORNECEU</code></td><td>Relacionamento</td><td>Fornecedor &rarr; Contrato</td></tr>
-    <tr><td><code>MESMO_ENDERECO</code></td><td>Relacionamento</td><td>Coligacao de risco por endereco compartilhado</td></tr>
+    <tr><td><code>MESMO_ENDERECO</code></td><td>Relacionamento</td><td>Coligacao de risco por endereço compartilhado</td></tr>
   </tbody>
 </table>
 
 <h2><span class="sn">05</span> Consultas Analiticas (Q1-Q7)</h2>
 <ol>
-  <li><strong>Q1</strong> &mdash; Contratos de um orgao especifico com valores e datas</li>
-  <li><strong>Q2</strong> &mdash; Fornecedores de um orgao, agregados por volume financeiro</li>
+  <li><strong>Q1</strong> &mdash; Contratos de um órgão específico com valores e datas</li>
+  <li><strong>Q2</strong> &mdash; Fornecedores de um órgão, agregados por volume financeiro</li>
   <li><strong>Q3</strong> &mdash; Fornecedores multiorgao (grau de conexao)</li>
-  <li><strong>Q4</strong> &mdash; Rede de mesmo endereco: fornecedores coligados atendendo o mesmo orgao</li>
+  <li><strong>Q4</strong> &mdash; Rede de mesmo endereço: fornecedores coligados atendendo o mesmo órgão</li>
   <li><strong>Q5</strong> &mdash; Menor caminho (shortest path) entre dois fornecedores</li>
   <li><strong>Q6</strong> &mdash; Top fornecedores por valor global</li>
-  <li><strong>Q7</strong> &mdash; Indicio de fracionamento de despesa (mesmo fornecedor/orgao, janela &lt;30 dias)</li>
+  <li><strong>Q7</strong> &mdash; Indício de fracionamento de despesa (mesmo fornecedor/órgão, janela &lt;30 dias)</li>
 </ol>
 
 <h2><span class="sn">06</span> Instrucoes de Implantacao</h2>
@@ -204,13 +204,13 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
 <h2><span class="sn">07</span> Relatorios e Resultados</h2>
 <ul>
-  <li><strong>Relatorio_RadarPNCP_Etapa3.md / .pdf</strong> &mdash; Relatorio tecnico completo</li>
+  <li><strong>Relatorio_RadarPNCP_Etapa3.md / .pdf</strong> &mdash; Relatório técnico completo</li>
   <li><strong>RadarPNCP_apresentacao_.pptx</strong> &mdash; Slides com arquitetura e prints do grafo</li>
   <li><strong>README_RadarPNCP.pdf</strong> &mdash; Esta documentacao de entrega</li>
 </ul>
 
-<h2><span class="sn">08</span> Evidencias de Execucao</h2>
-<p>Retornos literais das queries executadas na instancia de producao (AWS EC2 + Neo4j):</p>
+<h2><span class="sn">08</span> Evidencias de Execução</h2>
+<p>Retornos literais das queries executadas na instância de producao (AWS EC2 + Neo4j):</p>
 
 <div class="qc">
   <div class="qh">Q1 &mdash; Contratos do Ministerio da Gestao <span class="qb">MATCH / RETURN</span></div>
@@ -225,7 +225,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 </div>
 
 <div class="qc">
-  <div class="qh">Q2 &mdash; Fornecedores por Orgao (agregado) <span class="qb">MATCH / WITH / RETURN</span></div>
+  <div class="qh">Q2 &mdash; Fornecedores por Órgão (agregado) <span class="qb">MATCH / WITH / RETURN</span></div>
   <pre>[
   {
     "fornecedor": "SERVICO FEDERAL DE PROCESSAMENTO DE DADOS (SERPRO)",
@@ -256,7 +256,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 </div>
 
 <div class="qc">
-  <div class="qh">Q7 &mdash; Indicio de Fracionamento (janela &lt;30 dias) <span class="qb">TEMPORAL</span></div>
+  <div class="qh">Q7 &mdash; Indício de Fracionamento (janela &lt;30 dias) <span class="qb">TEMPORAL</span></div>
   <pre>[
   { "fornecedor": "SERPRO", "orgao": "MINISTERIO DA FAZENDA",
     "contrato_1": "00009", "contrato_2": "00001", "dias_entre_contratos": 26 },
@@ -268,7 +268,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 <h3>Visualizacao do Grafo no Neo4j Browser (AWS)</h3>
 <div class="shot">
   <img src="screenshots/neo4j_graph_visualization_1783524735421.png" alt="Grafo Neo4j"/>
-  <div class="shot-cap">Figura: Rede de contratos publicos do RadarPNCP &mdash; Neo4j Browser na instancia AWS EC2 (Julho 2026)</div>
+  <div class="shot-cap">Figura: Rede de contratos publicos do RadarPNCP &mdash; Neo4j Browser na instância AWS EC2 (Julho 2026)</div>
 </div>
 
 <hr/>

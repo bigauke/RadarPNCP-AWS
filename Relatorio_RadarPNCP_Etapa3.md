@@ -85,4 +85,4 @@ Alerta para contratos emitidos pelo mesmo órgão, para o mesmo fornecedor, com 
 | MINISTÉRIO DA FAZENDA | SERPRO | 00009 | 00001 | 26 dias |
 
 > [!WARNING]
-> **Alerta de Fracionamento:** Múltiplos contratos assinados num intervalo de `0` ou `1` dias identificados! É recomendável que a auditoria verifique se o objeto dos contratos foi fragmentado artificialmente para evitar concorrência mais rigorosa.
+> **Alerta de Fracionamento:** Múltiplos contratos assinados num intervalo de `0` ou `1` dias identificados! É recomendável que à auditoria verifique se o objeto dos contratos foi fragmentado artificialmente para evitar concorrência mais rigorosa.

@@ -254,7 +254,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
       </div>
       <div class="c-stat">
         <div class="c-stat-val">~$50</div>
-        <div class="c-stat-label">Custo/mes USD</div>
+        <div class="c-stat-label">Custo/mês USD</div>
       </div>
     </div>
   </div>
@@ -303,7 +303,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
   <div class="kpi ok"><div class="kpi-val">2 vCPU</div><div class="kpi-label">EC2 Compute</div><div class="kpi-sub">t3.medium</div></div>
   <div class="kpi ok"><div class="kpi-val">4 GB</div><div class="kpi-label">RAM EC2</div><div class="kpi-sub">Neo4j + OS</div></div>
   <div class="kpi"><div class="kpi-val">20 GB</div><div class="kpi-label">EBS gp3</div><div class="kpi-sub">3000 IOPS</div></div>
-  <div class="kpi warn"><div class="kpi-val">~$50</div><div class="kpi-label">Custo/mes</div><div class="kpi-sub">USD estimado</div></div>
+  <div class="kpi warn"><div class="kpi-val">~$50</div><div class="kpi-label">Custo/mês</div><div class="kpi-sub">USD estimado</div></div>
 </div>
 
 <!-- EC2 -->
@@ -359,7 +359,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
   <div class="ai">&#9888;</div>
   <div class="ab">
     <div class="at">SSH Aberto para Internet</div>
-    A porta 22 esta exposta para 0.0.0.0/0. Em producao, substituir por AWS Systems Manager Session Manager (sem SSH publico) ou restringir ao IP corporativo especifico.
+    A porta 22 esta exposta para 0.0.0.0/0. Em producao, substituir por AWS Systems Manager Session Manager (sem SSH publico) ou restringir ao IP corporativo específico.
   </div>
 </div>
 
@@ -374,12 +374,12 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
       <tr><td>Classe / RAM</td><td><code>db.t3.micro</code> &mdash; 1 GB RAM, 2 vCPUs</td></tr>
       <tr><td>Engine</td><td>PostgreSQL <code>18.3</code></td></tr>
       <tr><td>Endpoint</td><td><code>radarpncp-gold-db.crlngyuimjw7.us-east-1.rds.amazonaws.com:5432</code></td></tr>
-      <tr><td>Usuario Master</td><td><code>postgres</code></td></tr>
+      <tr><td>Usuário Master</td><td><code>postgres</code></td></tr>
       <tr><td>Storage</td><td>20 GB &mdash; <code>gp2</code> (SSD)</td></tr>
-      <tr><td>Encriptacao</td><td><span class="pill pill-red"><span class="pill-dot"></span>Nao</span></td></tr>
+      <tr><td>Encriptação</td><td><span class="pill pill-red"><span class="pill-dot"></span>Não</span></td></tr>
       <tr><td>Acesso Publico</td><td><span class="pill pill-yellow"><span class="pill-dot"></span>Sim (ambiente academico)</span></td></tr>
       <tr><td>AZ</td><td><code>us-east-1c</code></td></tr>
-      <tr><td>Multi-AZ</td><td><span class="pill pill-red"><span class="pill-dot"></span>Nao</span></td></tr>
+      <tr><td>Multi-AZ</td><td><span class="pill pill-red"><span class="pill-dot"></span>Não</span></td></tr>
       <tr><td>Backup Retention</td><td>0 dias (sem backup automatico)</td></tr>
       <tr><td>Parameter Group</td><td><code>default.postgres18</code></td></tr>
       <tr><td>Security Group</td><td><code>sg-0bfd0d5393863161b</code> &mdash; default (porta 5432 aberta)</td></tr>
@@ -449,13 +449,13 @@ conn = psycopg2.connect(
 <div class="alert alert-info">
   <div class="ai">&#128204;</div>
   <div class="ab">
-    <div class="at">Elastic IP Nao Associado</div>
-    O EIP <code>34.197.181.255</code> (AllocationId: eipalloc-017e9ca6702d76a6d) esta alocado mas nao associado a nenhuma instancia, gerando cubranca de aproximadamente <strong>$3,60/mes</strong>. Liberar se nao for utilizado.
+    <div class="at">Elastic IP Não Associado</div>
+    O EIP <code>34.197.181.255</code> (AllocationId: eipalloc-017e9ca6702d76a6d) está alocado mas não associado a nenhuma instância, gerando cobrança de aproximadamente <strong>$3,60/mês</strong>. Liberar se não for utilizado.
   </div>
 </div>
 
 <!-- IAM -->
-<h2><span class="sn">IAM</span> Funcao de Execucao</h2>
+<h2><span class="sn">IAM</span> Funcao de Execução</h2>
 
 <div class="spec-wrap">
   <div class="spec-header">LabRole <span class="spec-badge">Funcao Principal</span></div>
@@ -473,7 +473,7 @@ conn = psycopg2.connect(
 
 <div class="spec-wrap">
   <table>
-    <thead><tr><th>Recurso</th><th>Tipo</th><th>USD/hora</th><th>USD/mes estimado</th></tr></thead>
+    <thead><tr><th>Recurso</th><th>Tipo</th><th>USD/hora</th><th>USD/mês estimado</th></tr></thead>
     <tbody>
       <tr><td>EC2</td><td>t3.medium</td><td>$0,0416</td><td>~$30,00</td></tr>
       <tr><td>RDS</td><td>db.t3.micro</td><td>$0,0170</td><td>~$12,24</td></tr>
@@ -481,7 +481,7 @@ conn = psycopg2.connect(
       <tr><td>RDS Storage gp2</td><td>20 GB</td><td>&mdash;</td><td>~$2,30</td></tr>
       <tr><td>S3</td><td>~5 GB</td><td>&mdash;</td><td>~$0,12</td></tr>
       <tr><td>Elastic IP livre</td><td>eipalloc-017e9ca</td><td>$0,005</td><td>~$3,60</td></tr>
-      <tr class="cost-total"><td><strong>Total estimado</strong></td><td></td><td></td><td><strong>~$49,86/mes</strong></td></tr>
+      <tr class="cost-total"><td><strong>Total estimado</strong></td><td></td><td></td><td><strong>~$49,86/mês</strong></td></tr>
     </tbody>
   </table>
 </div>
@@ -498,9 +498,9 @@ conn = psycopg2.connect(
       <tr><td>EBS</td><td>20 GB gp3</td><td>500 GB gp3 + snapshots</td></tr>
       <tr><td>RDS Storage</td><td>20 GB gp2</td><td>200 GB gp3 + Multi-AZ</td></tr>
       <tr><td>Backup</td><td>Sem backup</td><td>7 dias retencao + PITR</td></tr>
-      <tr><td>Encriptacao</td><td>Nao</td><td>KMS habilitado em tudo</td></tr>
+      <tr><td>Encriptação</td><td>Não</td><td>KMS habilitado em tudo</td></tr>
       <tr><td>SSH Publico</td><td>0.0.0.0/0 aberto</td><td>Somente SSM Session Manager</td></tr>
-      <tr><td>Custo estimado</td><td>~$50/mes</td><td>~$800/mes</td></tr>
+      <tr><td>Custo estimado</td><td>~$50/mês</td><td>~$800/mês</td></tr>
     </tbody>
   </table>
 </div>
@@ -509,7 +509,7 @@ conn = psycopg2.connect(
   <div class="ai">&#10003;</div>
   <div class="ab">
     <div class="at">Ambiente Academico &mdash; Boa Relacao Custo/Beneficio</div>
-    Para a PoC com 200 contratos e as 7 consultas analiticas exigidas, a configuracao atual (t3.medium + db.t3.micro) e suficiente e economica. O Neo4j com 4 GB de RAM processa grafos com centenas de nos sem degradacao de performance mensuravel.
+    Para a PoC com 200 contratos e as 7 consultas analíticas exigidas, a configuracao atual (t3.medium + db.t3.micro) e suficiente e economica. O Neo4j com 4 GB de RAM processa grafos com centenas de nos sem degradacao de performance mensuravel.
   </div>
 </div>
 

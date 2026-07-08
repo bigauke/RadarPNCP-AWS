@@ -14,7 +14,7 @@ HTML = """<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
-<title>Relatorio RadarPNCP - Etapa 3</title>
+<title>Relatório RadarPNCP - Etapa 3</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -178,7 +178,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
   </div>
 
   <div class="cover-main">
-    <div class="cover-kicker">Relatorio Tecnico de Execucao &mdash; Julho 2026</div>
+    <div class="cover-kicker">Relatório Técnico de Execução &mdash; Julho 2026</div>
     <div class="cover-title">Rede de<br/>Contratacao<br/><em>Publica</em></div>
     <p class="cover-subtitle">Mapeamento em Grafo com Neo4j &mdash; Dados Reais do PNCP na AWS</p>
     <div class="cover-rule"></div>
@@ -212,7 +212,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
 <!-- ═══════════════════════════════ HEADER BAR ═══════════════════════════════ -->
 <div class="ph">
-  <span>RadarPNCP &mdash; Relatorio Tecnico de Execucao</span>
+  <span>RadarPNCP &mdash; Relatório Técnico de Execução</span>
   <span><span class="ph-dot"></span> eEDB-016 &middot; Escola Politecnica da USP &middot; <em>2026</em></span>
 </div>
 
@@ -220,11 +220,11 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
 <!-- INTRO -->
 <div class="intro">
-  <strong>Contexto de Execucao:</strong> Este relatorio documenta os resultados das 7 consultas analiticas (Q1-Q7) executadas diretamente no cluster Neo4j implantado na AWS EC2, consumindo dados extraidos do PostgreSQL (Gold Layer no RDS) e enriquecidos com enderecos processados no Data Lake via AWS Athena (CSV da Receita Federal armazenado no S3).
+  <strong>Contexto de Execução:</strong> Este relatório documenta os resultados das 7 consultas analíticas (Q1-Q7) executadas diretamente no cluster Neo4j implantado na AWS EC2, consumindo dados extraídos do PostgreSQL (Gold Layer no RDS) e enriquecidos com endereços processados no Data Lake via AWS Athena (CSV da Receita Federal armazenado no S3).
 </div>
 
 <!-- INFRA SPECS -->
-<h2><span class="sn">INFRA</span> Ambiente de Execucao &mdash; AWS (us-east-1)</h2>
+<h2><span class="sn">INFRA</span> Ambiente de Execução &mdash; AWS (us-east-1)</h2>
 <table>
   <thead><tr><th>Recurso</th><th>Tipo / Specs</th><th>Endpoint / Detalhe</th></tr></thead>
   <tbody>
@@ -232,7 +232,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
     <tr><td><strong>RDS &mdash; Gold Layer</strong></td><td><code>db.t3.micro</code> &mdash; 1 GB RAM<br/>PostgreSQL <code>18.3</code> &mdash; 20 GB gp2</td><td><code>radarpncp-gold-db.crlngyuimjw7<br/>.us-east-1.rds.amazonaws.com:5432</code></td></tr>
     <tr><td><strong>S3 &mdash; Data Lake</strong></td><td>2 buckets &mdash; ~4,8 GB<br/>Dados brutos Receita Federal (EMPRECSV)</td><td><code>radarpncp-hub-dados-a2e68685</code></td></tr>
     <tr><td><strong>Neo4j Browser</strong></td><td>Docker &mdash; Bolt :7687 &mdash; HTTP :7474</td><td><code>http://100.59.221.217:7474</code><br/>User: neo4j | Senha: radarpncp123</td></tr>
-    <tr><td><strong>Custo Estimado</strong></td><td>EC2 + RDS + EBS + S3 + EIP</td><td>~<strong>$50/mes</strong> (USD, us-east-1)</td></tr>
+    <tr><td><strong>Custo Estimado</strong></td><td>EC2 + RDS + EBS + S3 + EIP</td><td>~<strong>$50/mês</strong> (USD, us-east-1)</td></tr>
   </tbody>
 </table>
 
@@ -263,7 +263,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
 <!-- GRAPH -->
 <h2><span class="sn">GRAFO</span> Rede de Contratos &mdash; Neo4j Browser (AWS)</h2>
-<p>A renderizacao abaixo foi capturada diretamente da interface do Neo4j Browser rodando na instancia AWS EC2, com dados reais do PNCP mapeados como nos (orgaos, fornecedores, contratos) e arestas (CONTRATOU, FORNECEU, MESMO_ENDERECO).</p>
+<p>A renderizacao abaixo foi capturada diretamente da interface do Neo4j Browser rodando na instância AWS EC2, com dados reais do PNCP mapeados como nos (órgãos, fornecedores, contratos) e arestas (CONTRATOU, FORNECEU, MESMO_ENDERECO).</p>
 
 <div class="graph-wrap">
   <img src="screenshots/neo4j_graph_visualization_1783524735421.png" alt="Grafo Neo4j"/>
@@ -271,14 +271,14 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 </div>
 
 <!-- Q1 -->
-<h2><span class="sn">Q1</span> Top Contratos por Valor &mdash; Por Orgao</h2>
-<p><strong>Orgao Analisado:</strong> <code>MINISTERIO DA GESTAO E DA INOVACAO EM SERVICOS PUBLICOS</code><br/>
-Esta query identifica os maiores contratos (em volume financeiro) firmados pelo orgao selecionado.</p>
+<h2><span class="sn">Q1</span> Top Contratos por Valor &mdash; Por Órgão</h2>
+<p><strong>Órgão Analisado:</strong> <code>MINISTERIO DA GESTAO E DA INOVACAO EM SERVICOS PUBLICOS</code><br/>
+Esta query identifica os maiores contratos (em volume financeiro) firmados pelo órgão selecionado.</p>
 
 <div class="dtable-wrap">
   <div class="dtable-title">Resultado da Query Q1 <span class="dtable-badge">1 registro</span></div>
   <table>
-    <thead><tr><th>Orgao</th><th>N&ordm; Contrato</th><th>Data Assinatura</th><th>Valor Global (R$)</th></tr></thead>
+    <thead><tr><th>Órgão</th><th>N&ordm; Contrato</th><th>Data Assinatura</th><th>Valor Global (R$)</th></tr></thead>
     <tbody>
       <tr>
         <td>MINISTERIO DA GESTAO E DA INOVACAO EM SERVICOS PUBLICOS</td>
@@ -292,7 +292,7 @@ Esta query identifica os maiores contratos (em volume financeiro) firmados pelo 
 
 <!-- Q2 -->
 <h2><span class="sn">Q2</span> Total Contratado por Fornecedor</h2>
-<p>Total historico recebido pelos fornecedores que atenderam o orgao analisado na Q1.</p>
+<p>Total histórico recebido pelos fornecedores que atenderam o órgão analisado na Q1.</p>
 
 <div class="dtable-wrap">
   <div class="dtable-title">Resultado da Query Q2 <span class="dtable-badge">1 registro</span></div>
@@ -309,21 +309,21 @@ Esta query identifica os maiores contratos (em volume financeiro) firmados pelo 
 </div>
 
 <!-- Q3 -->
-<h2><span class="sn">Q3</span> Concentracao de Atendimento (Fornecedores Multi-Orgao)</h2>
-<p>Identifica fornecedores com capilaridade extrema no governo, fornecendo para multiplos orgaos simultaneamente.</p>
+<h2><span class="sn">Q3</span> Concentração de Atendimento (Fornecedores Multi-Órgão)</h2>
+<p>Identifica fornecedores com capilaridade extrema no governo, fornecendo para multiplos órgãos simultaneamente.</p>
 
 <div class="dtable-wrap">
   <div class="dtable-title">Resultado da Query Q3 <span class="dtable-badge">7 registros</span></div>
   <table>
     <thead><tr><th>Fornecedor</th><th>Qtd. de Orgaos Atendidos</th></tr></thead>
     <tbody>
-      <tr><td>SERVICO FEDERAL DE PROCESSAMENTO DE DADOS (SERPRO)</td><td class="val">45 orgaos</td></tr>
-      <tr><td>PRIME CONSULTORIA E ASSESSORIA EMPRESARIAL LTDA</td><td class="val">35 orgaos</td></tr>
-      <tr><td>CAIXA ECONOMICA FEDERAL - CEF</td><td class="val">35 orgaos</td></tr>
-      <tr><td>BANCO DO BRASIL SA</td><td class="val">25 orgaos</td></tr>
-      <tr><td>TELEFONICA BRASIL S.A.</td><td>5 orgaos</td></tr>
-      <tr><td>MAXIFROTA SERVICOS DE MANUTENCAO DE FROTA LTDA</td><td>5 orgaos</td></tr>
-      <tr><td>CRISTALIA PRODUTOS QUIMICOS FARMACEUTICOS LTDA</td><td>3 orgaos</td></tr>
+      <tr><td>SERVICO FEDERAL DE PROCESSAMENTO DE DADOS (SERPRO)</td><td class="val">45 órgãos</td></tr>
+      <tr><td>PRIME CONSULTORIA E ASSESSORIA EMPRESARIAL LTDA</td><td class="val">35 órgãos</td></tr>
+      <tr><td>CAIXA ECONOMICA FEDERAL - CEF</td><td class="val">35 órgãos</td></tr>
+      <tr><td>BANCO DO BRASIL SA</td><td class="val">25 órgãos</td></tr>
+      <tr><td>TELEFONICA BRASIL S.A.</td><td>5 órgãos</td></tr>
+      <tr><td>MAXIFROTA SERVICOS DE MANUTENCAO DE FROTA LTDA</td><td>5 órgãos</td></tr>
+      <tr><td>CRISTALIA PRODUTOS QUIMICOS FARMACEUTICOS LTDA</td><td>3 órgãos</td></tr>
     </tbody>
   </table>
 </div>
@@ -332,19 +332,19 @@ Esta query identifica os maiores contratos (em volume financeiro) firmados pelo 
   <div class="alert-icon">&#128161;</div>
   <div class="alert-body">
     <div class="alert-title">Insight Analitico</div>
-    Empresas estatais (SERPRO, CEF, BB) e grandes provedores de frota/tecnologia (Prime, Telefonica) dominam o atendimento descentralizado em dezenas de orgaos na amostra. Este padrao e esperado para estatais, mas merece atencao em empresas privadas com grau de conexao superior a 20 orgaos distintos.
+    Empresas estatais (SERPRO, CEF, BB) e grandes provedores de frota/tecnologia (Prime, Telefonica) dominam o atendimento descentralizado em dezenas de órgãos na amostra. Este padrao e esperado para estatais, mas merece atencao em empresas privadas com grau de conexao superior a 20 órgãos distintos.
   </div>
 </div>
 
 <!-- Q4/Q5 -->
 <h2><span class="sn">Q4/Q5</span> Identificacao de Cartel / Monopolio Fisico</h2>
-<p>As queries Q4 e Q5 cruzam o endereco matriz/filial (obtido da Receita Federal via Data Lake/Athena) para encontrar fornecedores diferentes operando no <strong>mesmo endereco fisico</strong> e prestando servicos para o mesmo orgao.</p>
+<p>As queries Q4 e Q5 cruzam o endereço matriz/filial (obtido da Receita Federal via Data Lake/Athena) para encontrar fornecedores diferentes operando no <strong>mesmo endereço físico</strong> e prestando serviços para o mesmo órgão.</p>
 
 <div class="alert alert-note">
   <div class="alert-icon">&#128203;</div>
   <div class="alert-body">
     <div class="alert-title">Resultado na Amostra</div>
-    Nao foram identificadas empresas distintas dividindo o mesmo endereco operando no mesmo orgao na amostra de 200 contratos. A restricao do limite amostral mitigou o aparecimento de fraudes deste tipo nesta execucao especifica. Em uma base completa (milhares de contratos), a probabilidade de colisao e significativamente maior.
+    Não foram identificadas empresas distintas dividindo o mesmo endereço operando no mesmo órgão na amostra de 200 contratos. A restrição do limite amostral mitigou o aparecimento de fraudes deste tipo nesta execução específica. Em uma base completa (milhares de contratos), a probabilidade de colisao é significativamente maior.
   </div>
 </div>
 
@@ -368,12 +368,12 @@ Esta query identifica os maiores contratos (em volume financeiro) firmados pelo 
 
 <!-- Q7 -->
 <h2><span class="sn">Q7</span> Fracionamento de Despesa (Contratos Sucessivos &lt; 30 dias)</h2>
-<p>Alerta para contratos emitidos pelo mesmo orgao, para o mesmo fornecedor, com intervalo menor ou igual a 30 dias entre assinaturas &mdash; possivel burla de limite licitatorio.</p>
+<p>Alerta para contratos emitidos pelo mesmo órgão, para o mesmo fornecedor, com intervalo menor ou igual a 30 dias entre assinaturas &mdash; possível burla de limite licitatório.</p>
 
 <div class="dtable-wrap">
   <div class="dtable-title">Resultado da Query Q7 &mdash; Alertas de Fracionamento <span class="dtable-badge">6 alertas</span></div>
   <table>
-    <thead><tr><th>Orgao</th><th>Fornecedor</th><th>Contrato A</th><th>Contrato B</th><th>Intervalo</th></tr></thead>
+    <thead><tr><th>Órgão</th><th>Fornecedor</th><th>Contrato A</th><th>Contrato B</th><th>Intervalo</th></tr></thead>
     <tbody>
       <tr class="days-0">
         <td>TRIBUNAL DE CONTAS DO ESTADO DO PARANA</td>
@@ -419,14 +419,14 @@ Esta query identifica os maiores contratos (em volume financeiro) firmados pelo 
   <div class="alert-icon">&#9888;</div>
   <div class="alert-body">
     <div class="alert-title">Alerta de Fracionamento Identificado</div>
-    Multiplos contratos assinados num intervalo de <strong>0 ou 1 dia</strong> foram identificados. E recomendavel que a auditoria verifique se o objeto dos contratos foi fragmentado artificialmente para evitar modalidades licitatorias mais rigorosas (ex.: Pregao Eletronico vs. Dispensa/Inexigibilidade).
+    Multiplos contratos assinados num intervalo de <strong>0 ou 1 dia</strong> foram identificados. E recomendavel que à auditoria verifique se o objeto dos contratos foi fragmentado artificialmente para evitar modalidades licitatorias mais rigorosas (ex.: Pregao Eletronico vs. Dispensa/Inexigibilidade).
   </div>
 </div>
 
 <hr/>
 <div class="pf">
   <span>RadarPNCP &middot; Escola Politecnica da USP &middot; eEDB-016 &middot; 2026</span>
-  <span>Relatorio Tecnico &mdash; Gerado via Chrome headless &middot; Julho 2026</span>
+  <span>Relatório Técnico &mdash; Gerado via Chrome headless &middot; Julho 2026</span>
 </div>
 
 </div><!-- /content -->

@@ -100,7 +100,7 @@
 ```
 Browser URL:  http://100.59.221.217:7474
 Bolt URI:     bolt://100.59.221.217:7687
-Usuario:      neo4j
+Usuário:      neo4j
 Senha:        radarpncp123
 ```
 
