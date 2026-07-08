@@ -3,6 +3,7 @@
 **Curso:** Especialização em Big Data — Escola Politécnica da USP
 **Disciplina:** Repositórios de Dados e NoSQL (eEDB-016)
 **Prof. Dr. Pedro Luiz Pizzigatti Corrêa — Prof. Dra. Jeaneth Machicao**
+**Discentes:** Antonio Daniel de Souza Linhares, Hércules, Yuri
 **Tecnologia NoSQL:** Neo4j (grafos) — implantado na nuvem (AWS)
 **Domínio:** contratações públicas do PNCP, modeladas como rede de relacionamentos entre órgãos públicos, fornecedores e contratos
 
