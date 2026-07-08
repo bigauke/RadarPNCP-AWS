@@ -116,11 +116,11 @@ try:
     with open(OUTPUT_PDF, "wb") as pdf_file:
         result = pisa.CreatePDF(html, dest=pdf_file, encoding="utf-8")
     if result.err:
-        print(f"❌ Erro ao gerar PDF: {result.err}")
+        print(f"Erro ao gerar PDF: {result.err}")
     else:
         size_kb = OUTPUT_PDF.stat().st_size // 1024
-        print(f"✅ PDF gerado com sucesso: {OUTPUT_PDF} ({size_kb} KB)")
+        print(f"PDF gerado com sucesso: {OUTPUT_PDF} ({size_kb} KB)")
         html_path.unlink(missing_ok=True)
 except ImportError:
-    print("⚠️  xhtml2pdf não encontrado. PDF não gerado.")
-    print(f"   HTML salvo em: {html_path}")
+    print("xhtml2pdf nao encontrado. PDF nao gerado.")
+    print(f"HTML salvo em: {html_path}")
