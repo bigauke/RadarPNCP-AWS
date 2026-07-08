@@ -34,7 +34,7 @@ from neo4j import GraphDatabase
 
 # ---------------- Config ----------------
 PG_DSN = dict(host="localhost", port=5432, dbname="pncp_db", user="postgres", password="postgres")
-NEO4J_URI = "bolt://localhost:7687"
+NEO4J_URI = "bolt://100.59.221.217:7687"
 NEO4J_AUTH = ("neo4j", "radarpncp123")
 
 LIMITE_CONTRATOS = 200             # sem API de por meio, pode subir esse número com tranquilidade

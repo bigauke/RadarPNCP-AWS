@@ -1,13 +1,12 @@
+# -*- coding: utf-8 -*-
 """
 ingest_postgres_to_neo4j.py
-RadarPNCP — versão híbrida: contratos reais (Postgres Gold) + endereço
+RadarPNCP - versão híbrida: contratos reais (Postgres Gold) + endereço
 real de fornecedores PJ via Receita Federal (espelhado pela BrasilAPI).
 
 Pré-requisitos:
     pip install psycopg2-binary requests neo4j --break-system-packages
-
-
-
+"""
 import time
 import psycopg2
 import psycopg2.extras
@@ -16,8 +15,8 @@ from neo4j import GraphDatabase
 
 # ---------------- Config ----------------
 PG_DSN = dict(host="localhost", port=5432, dbname="pncp_db", user="postgres", password="postgres")
-NEO4J_URI = "bolt://localhost:7687"
-NEO4J_AUTH = ("neo4j", "radarpncp123")
+NEO4J_URI = "bolt://32.192.83.243:7687"
+NEO4J_AUTH = ("neo4j", "RadarPNCP2024!")
 
 LIMITE_CONTRATOS = 200      # cap final de contratos — ainda é uma PoC, não o pipeline de 3,65M
 TOP_FORNECEDORES_MULTIORGAO = 80  # quantos fornecedores "interessantes" (>1 órgão) considerar antes do LIMIT
@@ -71,36 +70,70 @@ def extrair_contratos():
             return cur.fetchall()
 
 # ---------------- 2. Enriquecimento de endereço (Receita Federal via BrasilAPI) ----------------
-_cache_endereco = {}
+# ---------------- 2. Enriquecimento de endereço (Data Lake / S3 via Athena) ----------------
+import boto3
 
-def buscar_endereco_receita(cnpj_ou_cpf: str):
-    """Consulta o CNPJ na BrasilAPI (espelha o CNPJ público da Receita Federal).
-    Fornecedor pessoa física (CPF) não tem esse registro público — retorna None,
-    e o nó fica sem endereco (não participa de MESMO_ENDERECO)."""
-    doc = "".join(ch for ch in (cnpj_ou_cpf or "") if ch.isdigit())
-    if len(doc) != 14:
-        return None
-    if doc in _cache_endereco:
-        return _cache_endereco[doc]
-    try:
-        resp = requests.get(f"https://brasilapi.com.br/api/cnpj/v1/{doc}", timeout=10)
-        time.sleep(BRASILAPI_DELAY_S)
-        if resp.status_code != 200:
-            _cache_endereco[doc] = None
-            return None
-        d = resp.json()
-        partes = [
-            d.get("descricao_tipo_de_logradouro", "") or "",
-            d.get("logradouro", "") or "",
-        ]
-        rua = " ".join(p for p in partes if p).strip()
-        endereco = f"{rua}, {d.get('numero','')} - {d.get('bairro','')}, {d.get('municipio','')}/{d.get('uf','')}"
-        _cache_endereco[doc] = endereco
-        return endereco
-    except requests.RequestException as e:
-        print(f"  [aviso] falha ao consultar CNPJ {doc}: {e}")
-        _cache_endereco[doc] = None
-        return None
+athena = boto3.client('athena', region_name='us-east-1')
+S3_OUTPUT = "s3://radarpncp-athena-results-a2e68685/"
+
+def buscar_enderecos_athena(cnpjs):
+    """
+    Realiza uma única consulta (em lote) no Data Lake (Athena) para buscar
+    endereços de múltiplos CNPJs diretamente dos CSVs da Receita Federal.
+    Retorna um dicionário: {cnpj: endereco_formatado}
+    """
+    validos = [c for c in cnpjs if c and len("".join(filter(str.isdigit, c))) == 14]
+    if not validos:
+        return {}
+    
+    docs_limpos = ["".join(filter(str.isdigit, c)) for c in validos]
+    in_clause = ", ".join(f"'{c}'" for c in docs_limpos)
+    
+    query = f"""
+        SELECT 
+            cnpj_base || cnpj_ordem || cnpj_dv AS cnpj,
+            tipo_logradouro, logradouro, numero, bairro, municipio, uf
+        FROM estabelecimentos
+        WHERE (cnpj_base || cnpj_ordem || cnpj_dv) IN ({in_clause})
+    """
+    
+    print(f"  -> Disparando query no Athena para {len(docs_limpos)} CNPJs (Data Lake S3)...")
+    resp = athena.start_query_execution(
+        QueryString=query,
+        QueryExecutionContext={'Database': 'radarpncp_dl'},
+        ResultConfiguration={'OutputLocation': S3_OUTPUT}
+    )
+    qid = resp['QueryExecutionId']
+    
+    while True:
+        stat = athena.get_query_execution(QueryExecutionId=qid)['QueryExecution']['Status']
+        state = stat['State']
+        if state in ['SUCCEEDED', 'FAILED', 'CANCELLED']:
+            break
+        time.sleep(2)
+        
+    enderecos = {}
+    if state == 'SUCCEEDED':
+        # Paginação opcional (neste caso o volume de retorno é pequeno < 200)
+        res = athena.get_query_results(QueryExecutionId=qid)
+        rows = res['ResultSet']['Rows'][1:] # pular header
+        for r in rows:
+            data = r['Data']
+            # data: [cnpj, tipo_log, logradouro, numero, bairro, municipio, uf]
+            # tratar valores nulos / missing (col.get('VarCharValue'))
+            vals = [col.get('VarCharValue', '').strip() for col in data]
+            if len(vals) < 7:
+                continue
+            cnpj, tipo_log, logradouro, num, bairro, mun, uf = vals[:7]
+            
+            rua = f"{tipo_log} {logradouro}".strip()
+            endereco = f"{rua}, {num} - {bairro}, {mun}/{uf}"
+            enderecos[cnpj] = endereco
+        print(f"  -> Athena concluiu. {len(enderecos)} endereços encontrados nos 4,8GB de CSVs!")
+    else:
+        print(f"  -> Falha no Athena: {stat.get('StateChangeReason')}")
+        
+    return enderecos
 
 # ---------------- 3. Carga no Neo4j ----------------
 CYPHER_UPSERT = """
@@ -142,15 +175,19 @@ RETURN count(*) AS arestas_criadas
 """
 
 def _data_ou_none(valor):
-    """Converte date do Postgres em 'YYYY-MM-DD' ou preserva None
-    (evita que str(None) vire a string 'None' e quebre o date() do Cypher)."""
     return valor.isoformat() if valor is not None else None
 
 def carregar_no_neo4j(registros):
+    # Buscar todos os endereços via Athena (S3 Data Lake) de uma só vez
+    cnpjs_unicos = {r["fornecedor_ni"] for r in registros}
+    mapa_enderecos = buscar_enderecos_athena(cnpjs_unicos)
+
     driver = GraphDatabase.driver(NEO4J_URI, auth=NEO4J_AUTH)
     with driver.session() as session:
         for r in registros:
-            endereco = buscar_endereco_receita(r["fornecedor_ni"])
+            doc = "".join(filter(str.isdigit, r["fornecedor_ni"] or ""))
+            endereco = mapa_enderecos.get(doc)
+            
             session.run(CYPHER_UPSERT, {
                 "orgao_cnpj": r["orgao_cnpj"], "orgao_nome": r["orgao_nome"],
                 "codigo_unidade": r["codigo_unidade"], "nome_unidade": r["nome_unidade"],
@@ -170,7 +207,7 @@ def carregar_no_neo4j(registros):
             })
             nome = (r["fornecedor_nome"] or "?")[:40]
             orgao = (r["orgao_nome"] or "?")[:30]
-            print(f"  + {nome:40s} -> {orgao:30s} | endereco: {endereco or '—'}")
+            print(f"  + {nome:40s} -> {orgao:30s} | endereco: {endereco or '-'}")
 
         print("Conectando fornecedores com o mesmo endereço (MESMO_ENDERECO)...")
         result = session.run(CYPHER_MESMO_ENDERECO).single()

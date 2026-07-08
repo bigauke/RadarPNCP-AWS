@@ -1,46 +1,62 @@
 # RadarPNCP — Mapeamento de Redes de Contratação Pública em Grafo
 
-
-
 **Curso:** Especialização em Big Data — Escola Politécnica da USP
 **Disciplina:** Repositórios de Dados e NoSQL (eEDB-016)
 **Prof. Dr. Pedro Luiz Pizzigatti Corrêa — Prof. Dra. Jeaneth Machicao**
-**Tecnologia NoSQL:** Neo4j (grafos) — única tecnologia utilizada no projeto
+**Tecnologia NoSQL:** Neo4j (grafos) — implantado na nuvem (AWS)
 **Domínio:** contratações públicas do PNCP, modeladas como rede de relacionamentos entre órgãos públicos, fornecedores e contratos
 
 ---
 
-**Aviso:** Os dados utilizados neste repositório são, em sua maioria, fictícios/simulados, conforme o escopo da disciplina exige. Quando dados reais do PNCP são incorporados (amostra de fornecedores multiórgão), eles são extraídos de um pipeline próprio de ingestão já existente ([Lab01_PART1_5479786](https://github.com/hrvfreitas/Lab01_PART1_5479786)) e não passaram por auditoria externa — não devem ser usados como base para decisões oficiais ou denúncias, servindo apenas como demonstração técnica de modelagem NoSQL.
+**Aviso:** Os dados utilizados neste repositório combinam uma amostra de dados reais do PNCP (extraídos via pipeline próprio para AWS RDS) e alguns registros simulados para fins didáticos (testar travessias).
 
 ## Sumário
 
 1. [Domínio e Justificativa](#1-domínio-e-justificativa)
-2. [Arquitetura do Grafo](#2-arquitetura-do-grafo)
+2. [Arquitetura na Nuvem (AWS)](#2-arquitetura-na-nuvem-aws)
 3. [Estrutura de Diretórios](#3-estrutura-de-diretórios)
-4. [Application Workflow Diagram](#4-application-workflow-diagram)
-5. [Consultas Planejadas (Q1–Q7)](#5-consultas-planejadas-q1–q7)
-6. [Esquema do Grafo](#6-esquema-do-grafo)
-7. [Instruções de Execução](#7-instruções-de-execução)
-8. [Logs de Execução das Consultas](#8-logs-de-execução-das-consultas)
-9. [Observações Técnicas](#9-observações-técnicas)
+4. [Esquema do Grafo](#4-esquema-do-grafo)
+5. [Consultas Analíticas (Q1–Q7)](#5-consultas-analíticas-q1–q7)
+6. [Instruções de Implantação e Execução](#6-instruções-de-implantação-e-execução)
+7. [Relatórios e Resultados](#7-relatórios-e-resultados)
 
 ---
 
 ## 1. Domínio e Justificativa
 
-O **RadarPNCP** é uma aplicação fictícia de apoio à auditoria de contratos públicos, destinada a auditores de controle externo (ex.: Tribunais de Contas). Permite buscar um órgão público ou fornecedor e visualizar a rede de relacionamentos entre contratos, fornecedores e órgãos, destacando padrões que costumam indicar risco: concentração de fornecimento, fornecedores coligados pelo mesmo endereço, e indícios de fracionamento de despesa.
+O **RadarPNCP** é uma aplicação de apoio à auditoria de contratos públicos. Permite buscar um órgão público ou fornecedor e visualizar a rede de relacionamentos entre contratos, destacando padrões de risco como: concentração de fornecimento, coligação pelo mesmo endereço e indícios de fracionamento de despesa.
 
-| Atributo | Valor |
-| --- | --- |
-| **Tecnologia escolhida** | Neo4j (modelo de grafos) |
-| **Critério da matriz de decisão** | Aplicações cujo foco principal mapeia redes de interconexões — redes de contatos, fraudes financeiras ou dependências diretas |
-| **Por que não Documento/Chave-valor** | Não favorece naturalmente consultas de travessia multi-salto (RF4, RF5) |
-| **Por que não Família de Colunas** | Domínio não tem perfil de ingestão massiva em tempo real (IoT/logs) nessa escala de PoC |
-| **Por que não Vetorial** | Não atende aos requisitos de rede de relacionamentos (RF3–RF7) levantados |
+A tecnologia escolhida foi o **Neo4j** pois o padrão de acesso do negócio exige navegação multi-salto sobre uma teia de conexões — algo custoso no modelo relacional, mas natural no modelo de grafos.
 
-O padrão de acesso predominante do negócio não é busca direta por chave nem ingestão massiva sequencial — é a navegação por múltiplos saltos sobre uma rede de relacionamentos entre fornecedores, contratos e órgãos, para identificar conexões que não estão explícitas em uma única coleção de dados.
+## 2. Arquitetura na Nuvem (AWS)
 
-## 2. Arquitetura do Grafo
+O projeto evoluiu de um ambiente local para uma infraestrutura robusta na AWS:
+
+![Arquitetura AWS](beautiful_arch.png)
+
+1. **Amazon S3:** Armazena os dumps originais da base relacional ("Gold") e scripts auxiliares.
+2. **Amazon RDS:** Executa o PostgreSQL armazenando a base relacional estruturada.
+3. **Amazon EC2 (Ingest Engine):** Máquina virtual Ubuntu que executa os scripts Python de orquestração, consome os dados do RDS, enriquece com a BrasilAPI e faz o upsert no Neo4j.
+4. **Neo4j Graph Database:** Executando via Docker dentro da instância EC2, expondo as portas 7687 (Bolt) e 7474 (Browser).
+5. **Auditor/Usuário:** Acessa o painel do Neo4j na nuvem ou consome o relatório em PDF.
+
+## 3. Estrutura de Diretórios
+
+```
+radarpncp/
+├── deploy_to_aws.py                         # Automação de infraestrutura e execução via SSM
+├── run_ssm.py & restore_db_ssh.py           # Scripts auxiliares para execução remota na EC2
+├── ingest_postgres_to_neo4j.py              # Ingestão do RDS (Postgres) para o Neo4j via EC2
+├── extract_queries.py                       # Executa as queries Q1-Q7 no Neo4j e salva JSON
+├── Relatorio_RadarPNCP_Etapa3.md / .pdf     # Relatório final gerado automaticamente
+├── beautiful_arch.png                       # Diagrama arquitetural (usado nos slides)
+├── add_arch_to_ppt.py / add_graph_to_ppt.py # Scripts para injetar imagens na apresentação (.pptx)
+├── docker-compose.yml                       # Neo4j 5 local (se necessário)
+├── etapa3_poc_radarpncp.cypher              # Consultas Q1-Q7 em Cypher
+└── data/                                    # Volume local do Neo4j (ignorado pelo git)
+```
+
+## 4. Esquema do Grafo
 
 ```
 (OrgaoPublico) -[:CONTRATOU]-> (Contrato) <-[:FORNECEU]- (Fornecedor)
@@ -52,108 +68,124 @@ O padrão de acesso predominante do negócio não é busca direta por chave nem 
 (Fornecedor) -[:MESMO_ENDERECO]-> (Fornecedor)   // rede de risco
 ```
 
-`CONTRATOU`, `FORNECEU` e `DE_MODALIDADE` não carregam propriedades — os atributos relevantes (valor, datas) já estão no nó `Contrato`. `MESMO_ENDERECO` é a relação central para a particularidade de grafos exigida pelo enunciado: sem ela, Q4 e Q5 não existiriam.
+- **Nós:** `OrgaoPublico`, `Fornecedor`, `Contrato`, `Modalidade`.
+- **Relacionamentos:** `CONTRATOU`, `FORNECEU`, `DE_MODALIDADE`, `MESMO_ENDERECO`.
 
-## 3. Estrutura de Diretórios
+## 5. Consultas Analíticas (Q1–Q7)
 
-```
-radarpncp/
-├── docker-compose.yml                      # Neo4j 5, volumes persistentes
-├── etapa3_poc_radarpncp.cypher              # criação + 10 registros simulados + Q1-Q7
-├── ingest_postgres_to_neo4j.py              # ingestão real (Postgres) + endereço via BrasilAPI
-├── ingest_postgres_to_neo4j_local_rf.py     # variante: endereço via base local da Receita Federal
-├── docs/
-│   ├── declaracao_problema_radarpncp.docx   # Parte 1 do relatório (entregável)
-│   ├── workflow_pncp_grafo.png              # Application Workflow Diagram
-│   ├── tela_inicial_radarpncp.png           # wireframe — busca e alertas
-│   ├── tela_orgao_radarpncp.png             # wireframe — detalhe do órgão (Q1/Q2)
-│   └── tela_rede_radarpncp.png              # wireframe — rede de relacionamentos
-├── screenshots/                             # prints de execução das queries (preencher após rodar)
-└── data/                                    # volume do Neo4j — não versionado (.gitignore)
-```
+O foco do projeto são as análises via Cypher:
+1. **Q1:** Contratos de um órgão específico.
+2. **Q2:** Fornecedores de um órgão agregado por valor.
+3. **Q3:** Fornecedores multiórgão (grau de conexão).
+4. **Q4:** Rede de mesmo endereço (fornecedores conectados pelo endereço fornecendo ao mesmo órgão).
+5. **Q5:** Menor caminho (shortest path) entre dois fornecedores.
+6. **Q6:** Top fornecedores por modalidade.
+7. **Q7:** Indício de fracionamento de despesa (mesmo fornecedor, mesmo órgão, janela curta de tempo).
 
-## 4. Application Workflow Diagram
+## 6. Instruções de Implantação e Execução
 
-![Application Workflow Diagram](docs/workflow_pncp_grafo.png)
+A implantação na nuvem foi totalmente automatizada utilizando boto3 e Python.
 
-Jornada do auditor desde a busca inicial até a geração do relatório de risco, passando pelas consultas diretas (Q1, Q2) e pelas consultas de travessia de relacionamentos no grafo (Q3 a Q7).
+### Executando o Pipeline AWS
 
-## 5. Consultas Planejadas (Q1–Q7)
-
-| # | Consulta | Atributos pesquisados / ordenados / filtrados | Travessia |
-| --- | --- | --- | --- |
-| Q1 | Contratos de um órgão | filtra `cnpj` do órgão; ordena por `valor_global` desc; filtra período por `data_assinatura` | Não — 1 salto direto |
-| Q2 | Fornecedores de um órgão, valor agregado | filtra `cnpj` do órgão; agrupa por fornecedor; ordena `SUM(valor_global)` | Não — 1-2 saltos diretos |
-| Q3 | Fornecedores multiórgão | conta `COUNT(DISTINCT órgão)` por fornecedor; filtra > N órgãos | Sim — grau de conexão |
-| Q4 | Rede de mesmo endereço | percorre `MESMO_ENDERECO`; filtra órgão em comum entre fornecedores conectados | Sim — particularidade central de grafos |
-| Q5 | Caminho entre dois fornecedores | define fornecedor início/fim; calcula menor caminho na rede de vínculos | Sim — shortest path |
-| Q6 | Top fornecedores por modalidade | filtra nome da modalidade; ordena `SUM(valor_global)` | Não — 1-2 saltos |
-| Q7 | Possível fracionamento | mesmo fornecedor + mesmo órgão; filtra janela curta de `data_assinatura`; filtra `COUNT(contrato) > N` | Sim — travessia + filtro temporal |
-
-## 6. Esquema do Grafo
-
-**Nós**
-
-| Label | Propriedades |
-| --- | --- |
-| `OrgaoPublico` | `cnpj`, `nome`, `codigo_unidade`, `nome_unidade` |
-| `Fornecedor` | `ni_fornecedor`, `nome`, `tipo_pessoa`, `endereco` |
-| `Contrato` | `id_contrato_pncp`, `numero_contrato`, `processo`, `objeto_contrato`, `valor_inicial`, `valor_global`, `valor_parcelas`, `data_assinatura`, `data_vigencia_inicio`, `data_vigencia_fim`, `data_publicacao` |
-| `Modalidade` | `id_modalidade`, `nome` |
-
-**Relacionamentos**
-
-| Relacionamento | Direção | Cardinalidade |
-| --- | --- | --- |
-| `CONTRATOU` | `OrgaoPublico` → `Contrato` | 1 → N |
-| `FORNECEU` | `Fornecedor` → `Contrato` | 1 → N |
-| `DE_MODALIDADE` | `Contrato` → `Modalidade` | N → 1 |
-| `MESMO_ENDERECO` | `Fornecedor` → `Fornecedor` | N → N |
-
-`tipo_pessoa` e `endereco` em `Fornecedor` são campos enriquecidos — a API do PNCP não traz endereço; vêm da BrasilAPI/Receita Federal (dados reais) ou são simulados (dados fictícios), conforme a fonte usada na carga.
-
-## 7. Instruções de Execução
-
-### Subir o Neo4j
+O arquivo `deploy_to_aws.py` faz a ponte entre a sua máquina e a nuvem:
+1. Conecta na AWS e levanta/configura o Security Group.
+2. Restaura o Dump da base no PostgreSQL (RDS).
+3. Sobe o container do Neo4j na EC2.
+4. Executa a ingestão `ingest_postgres_to_neo4j.py` rodando internamente na EC2 via AWS Systems Manager (SSM).
 
 ```bash
-docker compose up -d
-docker compose ps    # espera status: healthy
+# Na sua máquina local, com as credenciais AWS configuradas:
+python deploy_to_aws.py
 ```
 
-### Opção A — dados simulados (não depende de nada externo)
+### Acessando o Grafo na Nuvem
 
-```bash
-docker compose exec neo4j cypher-shell -u neo4j -p radarpncp123 \
-  -f /var/lib/neo4j/import/etapa3_poc_radarpncp.cypher
+Após o script finalizar, o Neo4j estará disponível no IP Público da EC2:
 ```
-
-### Opção B — dados reais (depende do Postgres do pipeline PNCP já estar populado)
-
-```bash
-pip install psycopg2-binary requests neo4j --break-system-packages
-python ingest_postgres_to_neo4j.py
-# ou, com endereço via base local da Receita Federal em vez da BrasilAPI:
-python ingest_postgres_to_neo4j_local_rf.py
-```
-
-### Acessar
-
-```
-http://localhost:7474
+http://<IP_DA_EC2>:7474
 usuário: neo4j
 senha:   radarpncp123
 ```
 
-## 8. Logs de Execução das Consultas
+## 7. Relatórios e Resultados
 
-*Em preenchimento.* Print de cada uma das sete consultas (Q1 a Q7) retornando resultado será adicionado a `screenshots/` após a execução completa em sala de aula, conforme exigido pelo Relatório Técnico (Parte 2 do entregável).
+A prova material da execução da PoC encontra-se neste mesmo repositório:
+- **`Relatorio_RadarPNCP_Etapa3.md`**: Relatório completo contendo o raciocínio, o esquema estrutural, e os resultados extraídos diretamente do Neo4j na AWS.
+- **`Relatorio_RadarPNCP_Etapa3.pdf`**: Versão compilada e formatada do relatório para entrega final.
+- **`RadarPNCP_apresentacao_.pptx`**: Apresentação de slides atualizada automaticamente por script Python com a topologia da AWS e imagens reais do grafo extraídas via subagente.
 
-## 9. Observações Técnicas
+## 8. Evidências de Execução (Logs de Consultas)
 
-**Por que dados reais e simulados misturados?**
-A base combina contratos reais do PNCP — extraídos do pipeline já validado, priorizando fornecedores que comprovadamente atuam com múltiplos órgãos — com um pequeno conjunto de registros simulados, inserido propositalmente para garantir a demonstração das consultas de travessia (Q4, Q5 e Q7). Vínculos como mesmo endereço entre fornecedores são reais no domínio, mas pouco prováveis de surgir por acaso em uma amostra pequena; sem essa garantia, a apresentação correria o risco de não evidenciar ao vivo exatamente as consultas que justificam a escolha de um banco orientado a grafos.
+Para rápida conferência sem necessidade de subir o ambiente, abaixo estão os retornos JSON literais das queries executadas na nossa instância de produção (AWS EC2 + Neo4j):
 
-**Limitação conhecida:** o campo `endereco` não existe no endpoint `/contratos` da API do PNCP. Quando preenchido com dado real, vem de uma fonte externa (BrasilAPI, que espelha o CNPJ público da Receita Federal, ou uma base local dos Dados Abertos do CNPJ) — não do PNCP em si.
+### Q1: Contratos de um órgão (Ministério da Gestão)
+```json
+[
+  {
+    "orgao": "MINISTERIO DA GESTAO E DA INOVACAO EM SERVICOS PUBLICOS",
+    "contrato": "00065",
+    "valor": 3862241222.22,
+    "data": "2025-12-12"
+  }
+]
+```
 
-**Escala:** este projeto é deliberadamente uma PoC pequena (10 a ~200 registros), não uma réplica do pipeline relacional de 3,65M de contratos do [Lab01_PART1_5479786](https://github.com/hrvfreitas/Lab01_PART1_5479786). O foco aqui é a modelagem orientada a consultas em grafo, não o volume de dados.
+### Q2: Fornecedores de um órgão (agregado por valor)
+```json
+[
+  {
+    "fornecedor": "SERVICO FEDERAL DE PROCESSAMENTO DE DADOS (SERPRO)",
+    "qtd_contratos": 1,
+    "valor_total": 3862241222.22
+  }
+]
+```
+
+### Q3: Fornecedores Multiórgão (grau de conexão > 2 órgãos)
+```json
+[
+  { "fornecedor": "SERVICO FEDERAL DE PROCESSAMENTO DE DADOS (SERPRO)", "qtd_orgaos": 45 },
+  { "fornecedor": "PRIME CONSULTORIA E ASSESSORIA EMPRESARIAL LTDA", "qtd_orgaos": 35 },
+  { "fornecedor": "CAIXA ECONOMICA FEDERAL  -  CEF", "qtd_orgaos": 35 },
+  { "fornecedor": "BANCO DO BRASIL SA", "qtd_orgaos": 25 },
+  { "fornecedor": "TELEFONICA BRASIL S.A.", "qtd_orgaos": 5 }
+]
+```
+
+### Q6: Top fornecedores da amostra por valor global
+```json
+[
+  { "fornecedor": "SERVICO FEDERAL DE PROCESSAMENTO DE DADOS (SERPRO)", "valor_total": 8478844194.75 },
+  { "fornecedor": "CAIXA ECONOMICA FEDERAL  -  CEF", "valor_total": 4108106600.86 },
+  { "fornecedor": "BANCO DO BRASIL SA", "valor_total": 2629355332.56 }
+]
+```
+
+### Q7: Indício de Fracionamento (mesmo fornecedor/órgão num intervalo < 30 dias)
+```json
+[
+  {
+    "fornecedor": "SERVICO FEDERAL DE PROCESSAMENTO DE DADOS (SERPRO)",
+    "orgao": "MINISTERIO DA FAZENDA",
+    "contrato_1": "00009",
+    "contrato_2": "00001",
+    "dias_entre_contratos": 26
+  },
+  {
+    "fornecedor": "TELEFONICA BRASIL S.A.",
+    "orgao": "TRIBUNAL DE CONTAS DO ESTADO DO PARANA",
+    "contrato_1": "799",
+    "contrato_2": "26",
+    "dias_entre_contratos": 0
+  }
+]
+```
+
+*Nota: Consultas Q4 e Q5 foram elaboradas de forma focada no script `etapa3_poc_radarpncp.cypher` para os nós fictícios da demonstração e, em tempo de execução ao vivo com a base conectada na BrasilAPI, dependem de uma injeção de dados simulados (já incluída nos scripts).*
+
+### 📸 Prints das Execuções (Screenshots do Grafo)
+
+Além dos logs JSON das queries analíticas puras, a representação visual da rede (órgãos, fornecedores e contratos) foi gerada com sucesso pela interface do Neo4j Browser na AWS. 
+
+![Visualização Geral da Rede de Contratos](screenshots/neo4j_graph_visualization_1783524735421.png)

@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Ignore data and logs
+data/
+*.txt
+*.html
+*.gz
+

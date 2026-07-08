@@ -1,0 +1,176 @@
+{
+  "Q1": [
+    {
+      "orgao": "MINISTERIO DA GESTAO E DA INOVACAO EM SERVICOS PUBLICOS",
+      "contrato": "00065",
+      "objeto": null,
+      "valor": 3862241222.22,
+      "data": "2025-12-12"
+    }
+  ],
+  "Q2": [
+    {
+      "fornecedor": "SERVICO FEDERAL DE PROCESSAMENTO DE DADOS (SERPRO)",
+      "qtd_contratos": 1,
+      "valor_total": 3862241222.22
+    }
+  ],
+  "Q3": [
+    {
+      "fornecedor": "SERVICO FEDERAL DE PROCESSAMENTO DE DADOS (SERPRO)",
+      "qtd_orgaos": 45
+    },
+    {
+      "fornecedor": "PRIME CONSULTORIA E ASSESSORIA EMPRESARIAL LTDA",
+      "qtd_orgaos": 35
+    },
+    {
+      "fornecedor": "CAIXA ECONOMICA FEDERAL  -  CEF",
+      "qtd_orgaos": 35
+    },
+    {
+      "fornecedor": "BANCO DO BRASIL SA",
+      "qtd_orgaos": 25
+    },
+    {
+      "fornecedor": "TELEFONICA BRASIL S.A.",
+      "qtd_orgaos": 5
+    },
+    {
+      "fornecedor": "MAXIFROTA SERVI\u00c7OS DE MANUTEN\u00c7\u00c3O DE FROTA LTDA",
+      "qtd_orgaos": 5
+    },
+    {
+      "fornecedor": "CRISTALIA PRODUTOS QUIMICOS FARMACEUTICOS LTDA",
+      "qtd_orgaos": 3
+    },
+    {
+      "fornecedor": "REPREMIG REPRESENTACAO E COMERCIO DE MINAS GERAIS LTDA",
+      "qtd_orgaos": 2
+    },
+    {
+      "fornecedor": "VENTISOL DA AMAZ\u00d4NIA IND\u00daSTRIA DE APARELHOS EL\u00c9TRICOS LTDA",
+      "qtd_orgaos": 2
+    },
+    {
+      "fornecedor": "GENTE SEGURADORA S.A",
+      "qtd_orgaos": 2
+    }
+  ],
+  "Q4": [],
+  "Q5": [],
+  "Q6": [
+    {
+      "fornecedor": "SERVICO FEDERAL DE PROCESSAMENTO DE DADOS (SERPRO)",
+      "valor_total": 8478844194.75
+    },
+    {
+      "fornecedor": "CAIXA ECONOMICA FEDERAL  -  CEF",
+      "valor_total": 4108106600.86
+    },
+    {
+      "fornecedor": "BANCO DO BRASIL SA",
+      "valor_total": 2629355332.5699997
+    },
+    {
+      "fornecedor": "PRIME CONSULTORIA E ASSESSORIA EMPRESARIAL LTDA",
+      "valor_total": 2194324881.62
+    },
+    {
+      "fornecedor": "MAXIFROTA SERVI\u00c7OS DE MANUTEN\u00c7\u00c3O DE FROTA LTDA",
+      "valor_total": 1636850313.04
+    },
+    {
+      "fornecedor": "CRISTALIA PRODUTOS QUIMICOS FARMACEUTICOS LTDA",
+      "valor_total": 520607677.04999995
+    },
+    {
+      "fornecedor": "TELEFONICA BRASIL S.A.",
+      "valor_total": 148089450.26
+    },
+    {
+      "fornecedor": "GENTE SEGURADORA S.A",
+      "valor_total": 64525908.44
+    },
+    {
+      "fornecedor": "VENTISOL DA AMAZ\u00d4NIA IND\u00daSTRIA DE APARELHOS EL\u00c9TRICOS LTDA",
+      "valor_total": 48084825.0
+    },
+    {
+      "fornecedor": "REPREMIG REPRESENTACAO E COMERCIO DE MINAS GERAIS LTDA",
+      "valor_total": 45624778.0
+    }
+  ],
+  "Q7": [
+    {
+      "fornecedor": "SERVICO FEDERAL DE PROCESSAMENTO DE DADOS (SERPRO)",
+      "orgao": "MINISTERIO DA FAZENDA",
+      "contrato_1": "00009",
+      "contrato_2": "00001",
+      "dias_entre_contratos": 26
+    },
+    {
+      "fornecedor": "TELEFONICA BRASIL S.A.",
+      "orgao": "TRIBUNAL DE CONTAS DO ESTADO DO PARANA",
+      "contrato_1": "799",
+      "contrato_2": "26",
+      "dias_entre_contratos": 0
+    },
+    {
+      "fornecedor": "SERVICO FEDERAL DE PROCESSAMENTO DE DADOS (SERPRO)",
+      "orgao": "MINISTERIO DA JUSTICA E SEGURANCA PUBLICA",
+      "contrato_1": "00001",
+      "contrato_2": "00022",
+      "dias_entre_contratos": 9
+    },
+    {
+      "fornecedor": "MAXIFROTA SERVI\u00c7OS DE MANUTEN\u00c7\u00c3O DE FROTA LTDA",
+      "orgao": "INSTITUTO CHICO MENDES DE CONSERVACAO DA BIODIVERSIDADE",
+      "contrato_1": "3",
+      "contrato_2": "00003",
+      "dias_entre_contratos": 0
+    },
+    {
+      "fornecedor": "CAIXA ECONOMICA FEDERAL  -  CEF",
+      "orgao": "MINISTERIO DAS CIDADES",
+      "contrato_1": "00002",
+      "contrato_2": "00003",
+      "dias_entre_contratos": 9
+    },
+    {
+      "fornecedor": "CAIXA ECONOMICA FEDERAL  -  CEF",
+      "orgao": "MINISTERIO DAS CIDADES",
+      "contrato_1": "00003",
+      "contrato_2": "00016",
+      "dias_entre_contratos": 19
+    },
+    {
+      "fornecedor": "CAIXA ECONOMICA FEDERAL  -  CEF",
+      "orgao": "MINISTERIO DAS CIDADES",
+      "contrato_1": "00016",
+      "contrato_2": "00008",
+      "dias_entre_contratos": 1
+    },
+    {
+      "fornecedor": "CAIXA ECONOMICA FEDERAL  -  CEF",
+      "orgao": "MINISTERIO DAS CIDADES",
+      "contrato_1": "00008",
+      "contrato_2": "00016",
+      "dias_entre_contratos": 1
+    },
+    {
+      "fornecedor": "CAIXA ECONOMICA FEDERAL  -  CEF",
+      "orgao": "MINISTERIO DAS CIDADES",
+      "contrato_1": "00016",
+      "contrato_2": "00002",
+      "dias_entre_contratos": 1
+    },
+    {
+      "fornecedor": "CAIXA ECONOMICA FEDERAL  -  CEF",
+      "orgao": "MINISTERIO DAS CIDADES",
+      "contrato_1": "00002",
+      "contrato_2": "00011",
+      "dias_entre_contratos": 16
+    }
+  ]
+}
