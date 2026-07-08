@@ -307,10 +307,10 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 </div>
 
 <!-- EC2 -->
-<h2><span class="sn">EC2</span> Instancia RadarPNCP-Neo4j</h2>
+<h2><span class="sn">EC2</span> Instância RadarPNCP-Neo4j</h2>
 
 <div class="spec-wrap">
-  <div class="spec-header">Especificacoes da Instancia <span class="spec-badge">t3.medium &bull; RUNNING</span></div>
+  <div class="spec-header">Especificacoes da Instância <span class="spec-badge">t3.medium &bull; RUNNING</span></div>
   <table>
     <tbody>
       <tr><td>Instance ID</td><td><code>i-03d3f044e8ede0bca</code></td></tr>
@@ -359,7 +359,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
   <div class="ai">&#9888;</div>
   <div class="ab">
     <div class="at">SSH Aberto para Internet</div>
-    A porta 22 esta exposta para 0.0.0.0/0. Em producao, substituir por AWS Systems Manager Session Manager (sem SSH publico) ou restringir ao IP corporativo específico.
+    A porta 22 está exposta para 0.0.0.0/0. Em produção, substituir por AWS Systems Manager Session Manager (sem SSH público) ou restringir ao IP corporativo específico.
   </div>
 </div>
 

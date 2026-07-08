@@ -197,7 +197,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
         <div class="cover-card-value">Neo4j 5 + Cypher &mdash; AWS EC2/RDS</div>
       </div>
       <div class="cover-card">
-        <div class="cover-card-label">Dominio</div>
+        <div class="cover-card-label">Domínio</div>
         <div class="cover-card-value">Auditoria de Contratos Publicos (PNCP)</div>
       </div>
     </div>
@@ -267,7 +267,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
 <div class="graph-wrap">
   <img src="screenshots/neo4j_graph_visualization_1783524735421.png" alt="Grafo Neo4j"/>
-  <div class="graph-cap">Figura: Visualizacao da rede de contratos publicos no Neo4j Browser &mdash; Instancia AWS EC2 &middot; Julho 2026</div>
+  <div class="graph-cap">Figura: Visualização da rede de contratos públicos no Neo4j Browser &mdash; Instância AWS EC2 &middot; Julho 2026</div>
 </div>
 
 <!-- Q1 -->
@@ -337,7 +337,7 @@ Esta query identifica os maiores contratos (em volume financeiro) firmados pelo 
 </div>
 
 <!-- Q4/Q5 -->
-<h2><span class="sn">Q4/Q5</span> Identificacao de Cartel / Monopolio Fisico</h2>
+<h2><span class="sn">Q4/Q5</span> Identificação de Cartel / Monopólio Físico</h2>
 <p>As queries Q4 e Q5 cruzam o endereço matriz/filial (obtido da Receita Federal via Data Lake/Athena) para encontrar fornecedores diferentes operando no <strong>mesmo endereço físico</strong> e prestando serviços para o mesmo órgão.</p>
 
 <div class="alert alert-note">

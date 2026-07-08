@@ -109,7 +109,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
     <div class="ci"><span class="cl">Disciplina</span><span class="cv">Repositorios de Dados e NoSQL (eEDB-016)</span></div>
     <div class="ci"><span class="cl">Docentes</span><span class="cv">Prof. Dr. Pedro Luiz Pizzigatti Correa &middot; Prof. Dra. Jeaneth Machicao</span></div>
     <div class="ci"><span class="cl">Tecnologia</span><span class="cv">Neo4j 5 (grafos) &middot; AWS S3 + RDS + EC2 &middot; Python &middot; Cypher</span></div>
-    <div class="ci"><span class="cl">Dominio</span><span class="cv">Contratacoes publicas do PNCP modeladas como rede de relacionamentos</span></div>
+    <div class="ci"><span class="cl">Domínio</span><span class="cv">Contratacoes publicas do PNCP modeladas como rede de relacionamentos</span></div>
   </div>
   <div class="cf">
     <span class="cfl">Julho 2026 &middot; Repositorio: eEDB-016proj</span>
@@ -127,8 +127,8 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
 <div class="warn"><strong>Aviso sobre os Dados:</strong> Os dados combinam uma amostra de dados reais do PNCP (extraídos via pipeline para AWS RDS) cruzados com a base de dados pública de CNPJs da Receita Federal (via Data Lake no S3 e AWS Athena).</div>
 
-<h2><span class="sn">01</span> Dominio e Justificativa</h2>
-<p>O <strong>RadarPNCP</strong> e uma aplicação de apoio à auditoria de contratos publicos. Permite buscar um órgão publico ou fornecedor e visualizar a rede de relacionamentos entre contratos, destacando padrões de risco como: concentracao de fornecimento, coligação pelo mesmo endereço e indícios de fracionamento de despesa.</p>
+<h2><span class="sn">01</span> Domínio e Justificativa</h2>
+<p>O <strong>RadarPNCP</strong> e uma aplicação de apoio à auditoria de contratos públicos. Permite buscar um órgão público ou fornecedor e visualizar a rede de relacionamentos entre contratos, destacando padrões de risco como: concentração de fornecimento, coligação pelo mesmo endereço e indícios de fracionamento de despesa.</p>
 <p>A tecnologia escolhida foi o <strong>Neo4j</strong> porque o padrao de acesso do negocio exige navegacao multi-salto sobre uma teia de conexoes &mdash; algo computacionalmente custoso no modelo relacional, mas natural e eficiente no modelo de grafos.</p>
 
 <h2><span class="sn">02</span> Arquitetura na Nuvem (AWS)</h2>
@@ -171,7 +171,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
   <tbody>
     <tr><td><code>OrgaoPublico</code></td><td>No</td><td>Entidade governamental contratante</td></tr>
     <tr><td><code>Fornecedor</code></td><td>No</td><td>Empresa ou pessoa juridica fornecedora</td></tr>
-    <tr><td><code>Contrato</code></td><td>No</td><td>Contrato publico com numero, valor e data</td></tr>
+    <tr><td><code>Contrato</code></td><td>No</td><td>Contrato público com numero, valor e data</td></tr>
     <tr><td><code>Modalidade</code></td><td>No</td><td>Tipo de licitacao (Pregao, Dispensa etc.)</td></tr>
     <tr><td><code>CONTRATOU</code></td><td>Relacionamento</td><td>Órgão &rarr; Contrato</td></tr>
     <tr><td><code>FORNECEU</code></td><td>Relacionamento</td><td>Fornecedor &rarr; Contrato</td></tr>
@@ -206,11 +206,11 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 <ul>
   <li><strong>Relatorio_RadarPNCP_Etapa3.md / .pdf</strong> &mdash; Relatório técnico completo</li>
   <li><strong>RadarPNCP_apresentacao_.pptx</strong> &mdash; Slides com arquitetura e prints do grafo</li>
-  <li><strong>README_RadarPNCP.pdf</strong> &mdash; Esta documentacao de entrega</li>
+  <li><strong>README_RadarPNCP.pdf</strong> &mdash; Esta documentação de entrega</li>
 </ul>
 
 <h2><span class="sn">08</span> Evidencias de Execução</h2>
-<p>Retornos literais das queries executadas na instância de producao (AWS EC2 + Neo4j):</p>
+<p>Retornos literais das queries executadas na instância de produção (AWS EC2 + Neo4j):</p>
 
 <div class="qc">
   <div class="qh">Q1 &mdash; Contratos do Ministerio da Gestao <span class="qb">MATCH / RETURN</span></div>
@@ -265,10 +265,10 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 ]</pre>
 </div>
 
-<h3>Visualizacao do Grafo no Neo4j Browser (AWS)</h3>
+<h3>Visualização do Grafo no Neo4j Browser (AWS)</h3>
 <div class="shot">
   <img src="screenshots/neo4j_graph_visualization_1783524735421.png" alt="Grafo Neo4j"/>
-  <div class="shot-cap">Figura: Rede de contratos publicos do RadarPNCP &mdash; Neo4j Browser na instância AWS EC2 (Julho 2026)</div>
+  <div class="shot-cap">Figura: Rede de contratos públicos do RadarPNCP &mdash; Neo4j Browser na instância AWS EC2 (Julho 2026)</div>
 </div>
 
 <hr/>

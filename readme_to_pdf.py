@@ -122,5 +122,5 @@ try:
         print(f"PDF gerado com sucesso: {OUTPUT_PDF} ({size_kb} KB)")
         html_path.unlink(missing_ok=True)
 except ImportError:
-    print("xhtml2pdf nao encontrado. PDF nao gerado.")
+    print("xhtml2pdf não encontrado. PDF não gerado.")
     print(f"HTML salvo em: {html_path}")
