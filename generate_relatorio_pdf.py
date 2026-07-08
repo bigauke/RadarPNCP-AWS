@@ -186,7 +186,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
     <div class="cover-grid">
       <div class="cover-card">
         <div class="cover-card-label">Instituicao</div>
-        <div class="cover-card-value">Escola Politecnica da USP</div>
+        <div class="cover-card-value">Escola Politécnica da USP</div>
       </div>
       <div class="cover-card">
         <div class="cover-card-label">Disciplina</div>
@@ -213,7 +213,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 <!-- ═══════════════════════════════ HEADER BAR ═══════════════════════════════ -->
 <div class="ph">
   <span>RadarPNCP &mdash; Relatório Técnico de Execução</span>
-  <span><span class="ph-dot"></span> eEDB-016 &middot; Escola Politecnica da USP &middot; <em>2026</em></span>
+  <span><span class="ph-dot"></span> eEDB-016 &middot; Escola Politécnica da USP &middot; <em>2026</em></span>
 </div>
 
 <div class="content">
@@ -332,7 +332,7 @@ Esta query identifica os maiores contratos (em volume financeiro) firmados pelo 
   <div class="alert-icon">&#128161;</div>
   <div class="alert-body">
     <div class="alert-title">Insight Analitico</div>
-    Empresas estatais (SERPRO, CEF, BB) e grandes provedores de frota/tecnologia (Prime, Telefonica) dominam o atendimento descentralizado em dezenas de órgãos na amostra. Este padrao e esperado para estatais, mas merece atencao em empresas privadas com grau de conexao superior a 20 órgãos distintos.
+    Empresas estatais (SERPRO, CEF, BB) e grandes provedores de frota/tecnologia (Prime, Telefonica) dominam o atendimento descentralizado em dezenas de órgãos na amostra. Este padrão e esperado para estatais, mas merece atenção em empresas privadas com grau de conexão superior a 20 órgãos distintos.
   </div>
 </div>
 
@@ -425,7 +425,7 @@ Esta query identifica os maiores contratos (em volume financeiro) firmados pelo 
 
 <hr/>
 <div class="pf">
-  <span>RadarPNCP &middot; Escola Politecnica da USP &middot; eEDB-016 &middot; 2026</span>
+  <span>RadarPNCP &middot; Escola Politécnica da USP &middot; eEDB-016 &middot; 2026</span>
   <span>Relatório Técnico &mdash; Gerado via Chrome headless &middot; Julho 2026</span>
 </div>
 

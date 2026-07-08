@@ -235,9 +235,9 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
   </div>
 
   <div class="c-main">
-    <div class="c-eyebrow">Documentacao Tecnica de Infraestrutura Cloud</div>
+    <div class="c-eyebrow">Documentação Técnica de Infraestrutura Cloud</div>
     <div class="c-title">AWS<br/><em>Infrastructure</em><br/>Report</div>
-    <p class="c-sub">Especificacoes completas dos recursos provisionados na Amazon Web Services para o projeto RadarPNCP.</p>
+    <p class="c-sub">Especificações completas dos recursos provisionados na Amazon Web Services para o projeto RadarPNCP.</p>
     <div class="c-rule"></div>
     <div class="c-stats">
       <div class="c-stat">
@@ -260,7 +260,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
   </div>
 
   <div class="c-bottom">
-    <span class="c-bottom-l">eEDB-016 &middot; Escola Politecnica da USP &middot; Account: 089445119491</span>
+    <span class="c-bottom-l">eEDB-016 &middot; Escola Politécnica da USP &middot; Account: 089445119491</span>
     <div class="c-bottom-r">
       <span class="badge">us-east-1</span>
       <span class="badge">Neo4j &middot; PostgreSQL &middot; S3</span>
@@ -271,7 +271,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 <!-- ═══ HEADER BAR ═══════════════════════════════════════════════════════ -->
 <div class="ph">
   <span>RadarPNCP &mdash; Infraestrutura AWS</span>
-  <span>eEDB-016 &middot; Escola Politecnica da USP &middot; <em>Julho 2026</em></span>
+  <span>eEDB-016 &middot; Escola Politécnica da USP &middot; <em>Julho 2026</em></span>
 </div>
 
 <div class="content">
@@ -310,7 +310,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 <h2><span class="sn">EC2</span> Instância RadarPNCP-Neo4j</h2>
 
 <div class="spec-wrap">
-  <div class="spec-header">Especificacoes da Instância <span class="spec-badge">t3.medium &bull; RUNNING</span></div>
+  <div class="spec-header">Especificações da Instância <span class="spec-badge">t3.medium &bull; RUNNING</span></div>
   <table>
     <tbody>
       <tr><td>Instance ID</td><td><code>i-03d3f044e8ede0bca</code></td></tr>

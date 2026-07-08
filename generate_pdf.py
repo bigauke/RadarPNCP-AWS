@@ -15,7 +15,7 @@ HTML = r"""<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
-<title>RadarPNCP - Documentacao Tecnica</title>
+<title>RadarPNCP - Documentação Técnica</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{--bd:#0d1b4b;--bm:#1a3a8f;--bl:#3b82f6;--bp:#eff6ff;--acc:#f59e0b;--tx:#1e293b;--mu:#64748b;--br:#e2e8f0;--cb:#0f172a;--ct:#e2e8f0;--wh:#ffffff}
@@ -100,12 +100,12 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
 <!-- COVER -->
 <div class="cover">
-  <div class="cb">Documentacao Tecnica &middot; eEDB-016 &middot; 2026</div>
+  <div class="cb">Documentação Técnica &middot; eEDB-016 &middot; 2026</div>
   <h1><span>Radar</span>PNCP</h1>
   <p class="cs">Mapeamento de Redes de Contratacao Publica em Grafo &mdash; implantado na nuvem AWS com Neo4j</p>
   <div class="cd"></div>
   <div class="cm">
-    <div class="ci"><span class="cl">Curso</span><span class="cv">Especializacao em Big Data &mdash; Escola Politecnica da USP</span></div>
+    <div class="ci"><span class="cl">Curso</span><span class="cv">Especialização em Big Data &mdash; Escola Politécnica da USP</span></div>
     <div class="ci"><span class="cl">Disciplina</span><span class="cv">Repositorios de Dados e NoSQL (eEDB-016)</span></div>
     <div class="ci"><span class="cl">Docentes</span><span class="cv">Prof. Dr. Pedro Luiz Pizzigatti Correa &middot; Prof. Dra. Jeaneth Machicao</span></div>
     <div class="ci"><span class="cl">Tecnologia</span><span class="cv">Neo4j 5 (grafos) &middot; AWS S3 + RDS + EC2 &middot; Python &middot; Cypher</span></div>
@@ -119,8 +119,8 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
 <!-- HEADER -->
 <div class="ph">
-  <span>RadarPNCP &mdash; Documentacao Tecnica</span>
-  <span>eEDB-016 &middot; Escola Politecnica da USP &middot; <em>2026</em></span>
+  <span>RadarPNCP &mdash; Documentação Técnica</span>
+  <span>eEDB-016 &middot; Escola Politécnica da USP &middot; <em>2026</em></span>
 </div>
 
 <div class="content">
@@ -129,7 +129,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
 <h2><span class="sn">01</span> Domínio e Justificativa</h2>
 <p>O <strong>RadarPNCP</strong> e uma aplicação de apoio à auditoria de contratos públicos. Permite buscar um órgão público ou fornecedor e visualizar a rede de relacionamentos entre contratos, destacando padrões de risco como: concentração de fornecimento, coligação pelo mesmo endereço e indícios de fracionamento de despesa.</p>
-<p>A tecnologia escolhida foi o <strong>Neo4j</strong> porque o padrao de acesso do negocio exige navegacao multi-salto sobre uma teia de conexoes &mdash; algo computacionalmente custoso no modelo relacional, mas natural e eficiente no modelo de grafos.</p>
+<p>A tecnologia escolhida foi o <strong>Neo4j</strong> porque o padrão de acesso do negocio exige navegacao multi-salto sobre uma teia de conexoes &mdash; algo computacionalmente custoso no modelo relacional, mas natural e eficiente no modelo de grafos.</p>
 
 <h2><span class="sn">02</span> Arquitetura na Nuvem (AWS)</h2>
 <p>O projeto esta implantado na <strong>AWS us-east-1 (N. Virginia)</strong>, account <code>089445119491</code>, com os seguintes recursos provisionados e verificados em 08/07/2026:</p>
@@ -144,7 +144,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
     <tr><td><strong>VPC / Rede</strong></td><td>Default VPC &mdash; CIDR 172.31.0.0/16</td><td><code>vpc-0da7d8e58d69c379c</code> &mdash; us-east-1b</td></tr>
   </tbody>
 </table>
-<p style="font-size:8.5pt;color:#64748b;margin-top:6px">Especificacoes completas: <em>Infra_RadarPNCP_AWS.pdf</em> (gerado em 08/07/2026).</p>
+<p style="font-size:8.5pt;color:#64748b;margin-top:6px">Especificações completas: <em>Infra_RadarPNCP_AWS.pdf</em> (gerado em 08/07/2026).</p>
 
 <h2><span class="sn">03</span> Estrutura de Diretorios</h2>
 <pre>eEDB-016proj/
@@ -183,7 +183,7 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 <ol>
   <li><strong>Q1</strong> &mdash; Contratos de um órgão específico com valores e datas</li>
   <li><strong>Q2</strong> &mdash; Fornecedores de um órgão, agregados por volume financeiro</li>
-  <li><strong>Q3</strong> &mdash; Fornecedores multiorgao (grau de conexao)</li>
+  <li><strong>Q3</strong> &mdash; Fornecedores multiórgão (grau de conexão)</li>
   <li><strong>Q4</strong> &mdash; Rede de mesmo endereço: fornecedores coligados atendendo o mesmo órgão</li>
   <li><strong>Q5</strong> &mdash; Menor caminho (shortest path) entre dois fornecedores</li>
   <li><strong>Q6</strong> &mdash; Top fornecedores por valor global</li>
@@ -273,8 +273,8 @@ hr{border:none;border-top:1px solid var(--br);margin:26px 0}
 
 <hr/>
 <div class="pf">
-  <span>RadarPNCP &middot; Escola Politecnica da USP &middot; eEDB-016 &middot; 2026</span>
-  <span>Documentacao Tecnica &mdash; Gerada via script Python + Chrome headless</span>
+  <span>RadarPNCP &middot; Escola Politécnica da USP &middot; eEDB-016 &middot; 2026</span>
+  <span>Documentação Técnica &mdash; Gerada via script Python + Chrome headless</span>
 </div>
 
 </div>

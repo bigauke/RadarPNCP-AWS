@@ -12,6 +12,18 @@ files_to_check = [
 ]
 
 replacements = {
+    r'\bDocumentacao\b': 'Documentação',
+    r'\bTecnica\b': 'Técnica',
+    r'\bEspecificacoes\b': 'Especificações',
+    r'\bAplicacao\b': 'Aplicação',
+    r'\bConexao\b': 'Conexão',
+    r'\bAvaliacao\b': 'Avaliação',
+    r'\bPolitecnica\b': 'Politécnica',
+    r'\bEspecializacao\b': 'Especialização',
+    r'\bmultiorgao\b': 'multiórgão',
+    r'\bpadrao\b': 'padrão',
+    r'\batencao\b': 'atenção',
+    r'\bconexao\b': 'conexão',
     r'\bDominio\b': 'Domínio',
     r'\bpublicos\b': 'públicos',
     r'\bpublico\b': 'público',
@@ -21,14 +33,12 @@ replacements = {
     r'\bproducao\b': 'produção',
     r'\bVisualizacao\b': 'Visualização',
     r'\bInstancia\b': 'Instância',
+    r'\bInstância\b': 'Instância',
     r'\bIdentificacao\b': 'Identificação',
     r'\bMonopolio\b': 'Monopólio',
     r'\bFisico\b': 'Físico',
-    r'nao encontrado': 'não encontrado',
-    r'nao gerado': 'não gerado',
-    r'esta exposta': 'está exposta',
-    r'\bRadarPNCP\b e uma aplicação': 'RadarPNCP é uma aplicação',
-    r'Contrato publico': 'Contrato público'
+    r'\bnao\b': 'não',
+    r'\bNao\b': 'Não'
 }
 
 for file_name in files_to_check:
@@ -39,6 +49,7 @@ for file_name in files_to_check:
     
     new_content = content
     for pattern, replacement in replacements.items():
+        # Only replace exact words as provided, or we can use lambda
         new_content = re.sub(pattern, replacement, new_content)
         
     if new_content != content:
