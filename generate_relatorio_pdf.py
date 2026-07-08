@@ -95,7 +95,7 @@ body{font-family:'Inter',sans-serif;font-size:10.5pt;line-height:1.7;color:var(-
 p{margin-bottom:11px}
 strong{color:var(--bd)}
 code{font-family:'JetBrains Mono',monospace;background:#f1f5f9;color:#0f172a;
-  padding:1px 5px;border-radius:4px;font-size:8.5pt}
+  padding:1px 5px;border-radius:4px;font-size:8.5pt;word-break:break-all}
 
 /* HEADINGS */
 h2{font-size:15pt;font-weight:700;color:var(--bd);margin-top:36px;margin-bottom:13px;

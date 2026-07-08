@@ -174,7 +174,7 @@ tbody td{padding:6px 12px;border-bottom:1px solid var(--br);vertical-align:top;
   word-break:break-word;overflow-wrap:anywhere}
 tbody tr:nth-child(even) td{background:#f8fafc}
 tbody tr:last-child td{border-bottom:none}
-td:first-child{color:var(--mu);font-weight:500;width:32%;white-space:nowrap}
+td:first-child{color:var(--mu);font-weight:500;width:32%;word-break:break-all}
 td:last-child{color:var(--tx);font-weight:400}
 
 /* STATUS PILL */

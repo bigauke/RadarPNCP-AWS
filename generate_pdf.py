@@ -58,7 +58,7 @@ strong{color:var(--bd)}
 
 /* CODE */
 pre{background:var(--cb);color:var(--ct);border-radius:8px;padding:15px 19px;font-family:'JetBrains Mono','Courier New',monospace;font-size:8pt;line-height:1.6;white-space:pre-wrap;word-break:break-all;margin:13px 0;page-break-inside:avoid}
-code{font-family:'JetBrains Mono','Courier New',monospace;background:#f1f5f9;color:#0f172a;padding:1px 5px;border-radius:4px;font-size:8.5pt}
+code{font-family:'JetBrains Mono','Courier New',monospace;background:#f1f5f9;color:#0f172a;padding:1px 5px;border-radius:4px;font-size:8.5pt;word-break:break-all}
 
 /* LISTS */
 ul,ol{padding-left:22px;margin-bottom:11px}
