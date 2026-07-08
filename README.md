@@ -1,11 +1,21 @@
-# RadarPNCP — Mapeamento de Redes de Contratação Pública em Grafo
+# 🕸️ RadarPNCP — Mapeamento de Redes de Contratação Pública em Grafo
 
-**Curso:** Especialização em Big Data — Escola Politécnica da USP
-**Disciplina:** Repositórios de Dados e NoSQL (eEDB-016)
-**Prof. Dr. Pedro Luiz Pizzigatti Corrêa — Prof. Dra. Jeaneth Machicao**
-**Discentes:** Antonio Daniel de Souza Linhares, Hércules, Yuri
-**Tecnologia NoSQL:** Neo4j (grafos) — implantado na nuvem (AWS)
-**Domínio:** contratações públicas do PNCP, modeladas como rede de relacionamentos entre órgãos públicos, fornecedores e contratos
+> **Projeto de Especialização em Big Data — Escola Politécnica da USP**
+
+### 🎓 Equipe Acadêmica
+- **Disciplina:** Repositórios de Dados e NoSQL (eEDB-016)
+- **Docentes:** 
+  - Prof. Dr. Pedro Luiz Pizzigatti Corrêa
+  - Prof. Dra. Jeaneth Machicao
+- **Discentes:** 
+  - Antonio Daniel de Souza Linhares
+  - Hércules
+  - Yuri
+
+### 🛠️ Especificações Técnicas
+- **Tecnologia NoSQL:** Neo4j (Grafos) — implantado na nuvem (AWS EC2)
+- **Data Lake / Relacional:** AWS S3, AWS Athena, AWS RDS (PostgreSQL)
+- **Domínio:** Contratações públicas do PNCP, modeladas como uma teia de relacionamentos (órgãos, fornecedores, contratos, modalidades e locais).
 
 ---
 
